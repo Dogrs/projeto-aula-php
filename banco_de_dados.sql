@@ -10,12 +10,12 @@ CREATE TABLE pessoa (
 
 CREATE TABLE uf(
     id int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    nome varchar(255) DEFAULT NOT NULL,
-    sigla varchar(2) DEFAULT NOT NULL
+    nome varchar(255) NOT NULL,
+    sigla varchar(2)  NOT NULL
 )
 
 CREATE TABLE cidade(
     id int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    nome varchar(255) DEFAULT NOT NULL,
-    uf_id varchar(2) DEFAULT NOT NULL
+    nome varchar(255)  NOT NULL,
+    uf_id varchar(2)  NOT NULL
 )
