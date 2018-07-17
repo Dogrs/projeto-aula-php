@@ -17,7 +17,7 @@ CREATE TABLE uf(
 CREATE TABLE cidade(
     id int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
     nome varchar(255)  NOT NULL,
-    uf_id varchar(2)  NOT NULL
+    uf_id int(11)  NOT NULL
 );
 
 Insert Into uf (sigla,nome) 
