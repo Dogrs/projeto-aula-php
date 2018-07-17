@@ -76,7 +76,7 @@ function validarFormularioAvancado($post, $chaves)
 
 //Busca todos os UFs do banco
 $listaUf = select_db("SELECT id, nome, sigla FROM uf;");
-dd($listaUf);
+//dd($listaUf); --> gera o resultado na tela como teste
 
 
 
