@@ -74,6 +74,12 @@ function validarFormularioAvancado($post, $chaves)
     return $listaErros;
 }
 
+//Busca todos os UFs do banco
+$listaUf = select_db("SELECT id, nome, sigla FROM uf;");
+dd($listaUf);
+
+
+
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     $listaErros = [];
     include "cadastro-view.php";
