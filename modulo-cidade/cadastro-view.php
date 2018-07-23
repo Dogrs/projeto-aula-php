@@ -75,9 +75,8 @@
 		</div>
 
 		<div class="card-body">
-
-			<form action="<?php echo $SITE_URL . "/modulo-pessoa/cadastro-pessoa.php"; ?>" id="form-cadastro" method="POST">
-
+			<form action="<?php echo $SITE_URL . "/modulo-cidade/cadastro-cidade.php"; ?>" id="form-cadastro" method="POST">
+		<?php /* echo @$SITE_URL*/ ?>
 				<div class="form-group">
 					<div class="form-row ">
 						<div class="col-md-8">

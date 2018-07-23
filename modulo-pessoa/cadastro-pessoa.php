@@ -26,7 +26,7 @@ function validarFormularioSimples($post)
         $listaErros['email'] = "Informe um email válido.";
     }
 
-    if (!$post['sexo']) {
+    if (!isset($post['sexo']) || !$post['sexo']) {
         $listaErros['sexo'] = "Selecione um sexo.";
 
     } else if ( !in_array($post['sexo'], ['M', 'F']) ) {
