@@ -115,7 +115,17 @@
 					<div class="form-row">
 						<div class="col-md-12">
 							<button class="btn btn-success" type="submit">Salvar</button>
+							
+							<?php if (isset($mensagemSucesso) && $mensagemSucesso) { ?>
+								<span class="text-success"> <?php echo $mensagemSucesso; ?> </span>
+							<?php } ?>
+							<?php
+								if (isset($mensagemErro) && $mensagemErro){
+									echo '<span class = "text-danger">'. $mensagemErro .'</span>';
+								}
+							?>
 						</div>
+
 					</div>
 				</div>
 			</form>
