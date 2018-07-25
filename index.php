@@ -6,5 +6,5 @@ include "config.php";
 <h2> Substitulo </h2>
 
 <script type='text/javascript'>
-    window.location.href = '/projeto-aula-php/modulo-pessoa/cadastro-pessoa.php';
+    window.location.href = '/modulo-pessoa/cadastro-pessoa.php';
 </script>

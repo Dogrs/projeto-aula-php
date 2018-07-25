@@ -92,8 +92,8 @@
 							?>
 						</div>
 						<div class="col-md-4">
-							<label for="uf">Sigla</label>
-							<input class="form-control" name="sigla" id="sigla" placeholder="Nome do Estado" type="text" />
+							<label for="sigla">Sigla</label> <?php /* o for, leva ao id de baixo, quando se clica no "titulo do campo" */ ?>
+							<input class="form-control" name="sigla" id="sigla" placeholder="Sigla do Estado" type="text" />
 							<?php
 							/* Validação do input nome (este codigo foi passado para a função exibirErro) */
 							if ( isset($listaErros['sigla']) && $listaErros['sigla'] ) {
