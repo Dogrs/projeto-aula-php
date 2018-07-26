@@ -77,7 +77,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
             
         if ($estadoId) {
-            $mensagemSucesso= "Estado cadastrada com sucesso";
+            $mensagemSucesso= "Estado cadastrado com sucesso";
         } else{
             $mensagemErro = "Erro Inesperado";
         }
