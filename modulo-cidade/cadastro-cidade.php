@@ -1,14 +1,6 @@
 <?php
 include '../config.php';
 
-function exibirErro($listaErros, $chave)
-{
-    if ( isset($listaErros[$chave]) && $listaErros[$chave]) {
-        return '<span class="text-danger">' . $listaErros[$chave] . '</span>';
-    }
-    return '';
-}
-
 /**
  * Valida formulario simples
  */

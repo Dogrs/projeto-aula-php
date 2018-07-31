@@ -8,6 +8,25 @@
 	
 		<?php include "../comum/migalhas.php"; ?>
 
+        <?php 
+            if ($mensagemSucesso) 
+            {
+                ?>
+                <div class="alert alert-success">
+                    <?php echo $mensagemSucesso; ?>
+                </div>
+                <?php
+            }
+
+            if ($listaErros) {
+                ?>
+                <div class="alert alert-danger">
+                    <?php echo exibirErro($listaErros, 'delete'); ?>
+                </div>
+                <?php
+            }
+        ?>
+
 
         <table class="table table-bordered table-striped">  
             <thead> 
@@ -25,8 +44,8 @@
                         <th> <?php echo "{$cidade->uf_nome} ({$cidade->uf_sigla})"; ?> </th>
                         <th>
                             <button class="btn btn-primary">Editar</button>
-                            <button class="btn btn-danger">
-                                <i class="fa fa-fw fa-close"></i>
+                            <button class="btn btn-danger" data-delete-message="<?php echo "Deseja deletar a cidade {$cidade->cidade_nome} ?"; ?>" data-delete-url="<?php echo "/modulo-cidade?delete=1&id={$cidade->cidade_id}"; ?>"  onclick="deletarRegistro(this);">
+                            <i class="fa fa-remove"></i>
                             </button>
                         </th>
                     </tr>
@@ -37,6 +56,21 @@
         </table>
     </div>
 </div>
+
+<script type="text/javascript"> 
+
+/*function deletarRegistro(id)
+{
+    var ok = confirm("Deletar o registro ID=  " + id + "?")
+    if (ok){ windows.location.href= "/modulo-cidade?delete=1&id="+id;};
+
+
+    //console.log("ID: ",id);
+    //console.log($('.table'));
+
+}*/
+
+</script>
 
 <?php include "../comum/footer.php"; ?>
 

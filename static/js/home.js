@@ -1,4 +1,23 @@
 
+function deletarRegistro(btn) {
+    console.log('btn: ', btn);
+    btn = $(btn);
+    var mensagem = btn.attr('data-delete-message');
+    var url = btn.attr('data-delete-url');
+
+    var modal = $('#modal-delete');
+    modal.find('.modal-body').html(mensagem);
+    modal.modal({keyboard: false, show: true});
+    modal.find('.btn-sim').on('click', function(){window.location.href = url;});
+    modal.find('.btn-nao').on('click', function(){modal.modal('hide');});
+
+    /*if( confirm(mensagem)  )
+    {
+       window.location.href = url;
+    }*/
+
+
+
 
 function trocarCidades() {
     console.log("trocarCidades");
