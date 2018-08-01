@@ -1,13 +1,14 @@
 <?php
 include '../config.php';
 
+/*
 function exibirErro($listaErros, $chave)
 {
     if ( isset($listaErros[$chave]) && $listaErros[$chave]) {
         return '<span class="text-danger">' . $listaErros[$chave] . '</span>';
     }
     return '';
-}
+}*/
 
 /**
  * Valida formulario simples
@@ -75,10 +76,13 @@ function validarFormularioAvancado($post, $chaves)
 }
 
 //Busca todos os UFs do banco
-$listaUf = select_db("SELECT id, nome, sigla FROM uf;");
+$listaUf = select_db("SELECT id, nome, sigla FROM uf ORDER BY nome;");
 //dd($listaUf); --> gera o resultado na tela como teste
 
+//Busca todas as Cidades cadastradas
+$listaCidades = select_db("SELECT id, nome, uf_id FROM cidade ORDER BY nome ASC, nome ;");
 
+//dd($listaCidades);
 
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     $listaErros = [];

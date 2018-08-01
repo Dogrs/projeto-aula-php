@@ -53,7 +53,8 @@ function validarEmail($email) {
  */
 function exibirErro($listaErros, $chave)
 {
-    if ( isset($listaErros[$chave]) && $listaErros[$chave]) {
+    if (isset($listaErros[$chave]) && $listaErros[$chave]) 
+    {
         return '<span class="text-danger">' . $listaErros[$chave] . '</span>';
     }
     return '';

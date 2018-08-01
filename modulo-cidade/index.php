@@ -46,7 +46,7 @@
                             cidade as A
                             INNER JOIN uf AS B ON(B.id = A.uf_id)
                         ORDER BY
-                            A.id ASC;
+                            A.nome ASC;
                                 ");
         //dd($listaCidades);
 

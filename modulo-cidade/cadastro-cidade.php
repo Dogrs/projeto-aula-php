@@ -24,7 +24,7 @@ function validarFormularioSimples($post)
 
 
 //Busca todos os UFs do banco
-$listaUf = select_db("SELECT id, nome, sigla FROM uf;");
+$listaUf = select_db("SELECT id, nome, sigla FROM uf ORDER BY 2;");
 //dd($listaUf); --> gera o resultado na tela como teste
 
 
