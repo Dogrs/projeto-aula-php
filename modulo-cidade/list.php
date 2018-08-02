@@ -18,15 +18,28 @@
                 <?php
             }
 
-            if ($listaErros) {
+            if ($listaErros)
+            {
                 ?>
                 <div class="alert alert-danger">
                     <?php echo exibirErro($listaErros, 'delete'); ?>
                 </div>
                 <?php
             }
-        ?>
+            /*
+            if (isset($_SESSION['msg_sucesso']) && $_SESSION['msg_sucesso']) 
+            {
+                <div class="alert alert-success">
+                    <?php echo $_SESSION['msg_sucesso']; ?>
+                </div>
+                unset($_SESSION['msg_sucesso']);    
+            }                   
+            */
+                ?>
         
+
+
+
         <a href="/modulo-cidade/cadastro-cidade.php">
             <button class="btn btn-default">Nova Cidade </button>
         </a>

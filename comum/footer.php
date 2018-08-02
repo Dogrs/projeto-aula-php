@@ -29,8 +29,18 @@
 <script src="<?php echo $SITE_URL . "/static/vendor/jquery-easing/jquery.easing.min.js"; ?>"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
 <script src="<?php echo $SITE_URL . "/static/js/sb-admin.min.js"; ?>"></script>
+<script src="<?php echo $SITE_URL . "/static/vendor/bootstrap-notify.js" ?>"></script>
 <script src="<?php echo $SITE_URL . "/static/js/home.js"; ?> "></script>
 <?php /* FIM SCRIPTS ADICIONAIS */ ?>	
+
+<?php /* SCRIPTS DO NOTIFY */ ?>
+<?php if (isset($_SESSION['msg_sucesso']) && $_SESSION['msg_sucesso']) 
+{ ?>
+  <script type="text/javascript">
+    $.notify(<?php echo json_encode($_SESSION['msg_sucesso']); ?>,
+    {type: 'success',delay: 3000});
+  </script>
+  <?php  unset($_SESSION['msg_sucesso']);}?>
 
 </body>
 </html>

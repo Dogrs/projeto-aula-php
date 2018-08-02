@@ -20,17 +20,16 @@ function connect_db()
         );
         // set the PDO error mode to exception
         //$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-
-
     } catch(PDOException $e) {
         echo "Connection failed: " . $e->getMessage();
     }
     return $conn;
 }
 
-function error_db($e,$sql) {
-    echo '<pre>' . $sql . "<br>" . $e->getMessage() . '</pre>';
+function error_db($e, $sql) {
+    echo "<div style='color: red !important; background-color: #FFF !important;'> ERRO NO BANCO DE DADOS:<br>";
+    echo 'SQL: <pre>' . $sql . "<br> ERRO: " . $e->getMessage() . '</pre>';
+    echo "</div>";
 }
 
 /**
@@ -71,11 +70,10 @@ function select_one_db($sql)
         $conn = connect_db();
         $select = $conn->prepare($sql); 
         $select->execute();
-    
         $result = $select->setFetchMode(PDO::FETCH_OBJ); 
         return $select->fetch();
     } catch(PDOException $e) {
-        error_db($e,$sql);
+        error_db($e, $sql);
     }
     return false;
 }

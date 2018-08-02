@@ -12,6 +12,7 @@
 	<link href="<?php echo $SITE_URL . "/static/vendor/bootstrap/css/bootstrap.css"; ?>" rel="stylesheet" type="text/css">
 	<!-- Custom fonts for this template-->
 	<link href="<?php echo $SITE_URL . "/static/vendor/font-awesome/css/font-awesome.css"; ?>" rel="stylesheet" type="text/css">
+	<link href="<?php echo $SITE_URL . "/static/vendor/animate.css"; ?>" rel="stylesheet" type="text/css">
 	<!-- Custom styles for this template-->
 	<link href="<?php echo $SITE_URL . "/static/css/sb-admin.css" ?>" rel="stylesheet">
 </head>

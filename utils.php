@@ -73,4 +73,9 @@ function deletarRegistro($id, $tableName)
     }
     return $retorno;
 }
+
+/**
+ * Direciona o usuario para a $url recebida no parametro.
+ */
+function redirect($url){die("<script>window.location.href = '{$url}';</script>");}
 ?>

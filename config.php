@@ -1,4 +1,5 @@
 <?php
+session_start(); // inicia o $_SESSION
 
 // Inclui arquivo de configuração e metodos de conexão com banco de dados.
 include 'db.php';
@@ -10,17 +11,12 @@ include 'utils.php';
  * Arquivo de configuração do projeto
  */
 
-
 // Ativar exibição de erros no PHP */
 ini_set('display_errors', 1);
 ini_set('display_startup_erros', 1);
 error_reporting(E_ALL);
 
-//$SITE_URL = 'http://aulaphp.com'//'http://localhost/projeto-aula-php';
-$SITE_URL = 'http://aula.com'//'http://localhost/projeto-aula-php';
-
+$SITE_URL = 'http://aulaphp.com'//'http://localhost/projeto-aula-php';
+//$SITE_URL = 'http://aula.com'
+//$SITE_URL = 'http://aulaphp.com/projeto-aula-php/'
 ?>
-
-
-
-

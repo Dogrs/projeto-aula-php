@@ -10,13 +10,14 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
                 <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
-                    <a class="nav-link" href="/modulo-pessoa/cadastro-pessoa.php">
+                    <!--<a class="nav-link" href="/modulo-pessoa/cadastro-pessoa.php">
                         <i class="fa fa-fw fa-user"></i>
                         <span class="nav-link-text">Cadastro de Pessoas</span>
                     </a>
                 </li>
                 <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
-                    <a class="nav-link" href="/modulo-cidade/">
+                    <a class="nav-link" href="/modulo-cidade/">  -->
+                        <a class="nav-link" href="/modulo-cidade/">
                         <i class="fa fa-fw fa-list"></i>
                         <span class="nav-link-text">Cidades</span>
                     </a>
