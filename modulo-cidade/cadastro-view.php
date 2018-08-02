@@ -11,7 +11,12 @@
 		<?php include "../comum/migalhas.php"; ?>
 	<div class="card">
 		<div class="card-header">
-        	<i class="fa fa-user"></i> Cadastro de Cidades
+        	<i class="fa fa-user"></i> 
+			<?php 
+				if (isset($cidade)){echo "Alterar cidade: {$cidade->nome}";}
+				else{echo "Cadastro de Cidades";}
+			?>
+			
 		</div>
 
 		<div class="card-body">
@@ -21,13 +26,13 @@
 					<div class="form-row ">
 						<div class="col-md-8">
 							<label for="nome">Nome</label>
-							<input class="form-control" name="nome" id="nome" placeholder="Nome da cidade" type="text" />
+							<input class="form-control" name="nome" id="nome" placeholder="Nome da cidade" type="text" value="<?php echo(isset($cidade)) ? $cidade->nome :''; ?>" />
 							<?php
 							/* Validação do input nome (este codigo foi passado para a função exibirErro) */
-							if ( isset($listaErros['nome']) && $listaErros['nome'] ) {
+							if ( isset($listaErros['nome']) && $listaErros['nome'] )
+							{
 								?>
-								<span class="text-danger"><?php echo $listaErros['nome']; ?></span>
-								<?php
+									<span class="text-danger"><?php echo $listaErros['nome']; ?></span>
 							}
 							?>
 						</div>
@@ -55,7 +60,9 @@
 					<div class="form-row">
 						<div class="col-md-12">
 							<button class="btn btn-success" type="submit">Salvar</button>
-							
+							<a href="/modulo-cidade/">
+								<button type="button" class="btn btn-default">Cancelar </button>
+							</a>
 							<?php if (isset($mensagemSucesso) && $mensagemSucesso) { ?>
 								<span class="text-success"> <?php echo $mensagemSucesso; ?> </span>
 							<?php } ?>
@@ -65,7 +72,7 @@
 								}
 							?>
 						</div>
-
+						
 					</div>
 				</div>
 			</form>

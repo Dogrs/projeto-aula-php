@@ -29,11 +29,20 @@ $listaUf = select_db("SELECT id, nome, sigla FROM uf ORDER BY 2;");
 
 
 
-if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+if ($_SERVER['REQUEST_METHOD'] == 'GET')
+{
     $listaErros = [];
+    if (isset($_GET['edit']) && isset($_GET['id'])) && $_GET['edit'] == 1 && $_GET['id']
+    {
+        $lista = select_one_db("SELECT id, nome, uf_id FROM cidade WHERE id ={$_GET['id]}");
+                
+    }
+
     include "cadastro-view.php";
 
-} else if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+}
+else if ($_SERVER['REQUEST_METHOD'] == 'POST') 
+{
     echo "Formulario enviado <br>";
     
     // Utilizem o metodo validarFormularioSimples OU validarFormularioAvancado

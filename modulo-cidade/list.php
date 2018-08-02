@@ -26,7 +26,10 @@
                 <?php
             }
         ?>
-
+        
+        <a href="/modulo-cidade/cadastro-cidade.php">
+            <button class="btn btn-default">Nova Cidade </button>
+        </a>
 
         <table class="table table-bordered table-striped">  
             <thead> 
@@ -43,7 +46,9 @@
                         <?php /*<th> <?php echo $cidade->uf_nome; ?> (<?php echo $cidade->uf_sigla; ?>) </th> */?>
                         <th> <?php echo "{$cidade->uf_nome} ({$cidade->uf_sigla})"; ?> </th>
                         <th>
-                            <button class="btn btn-primary">Editar</button>
+                            <a href= "<?php echo "/modulo-cidade/cadastro-cidade.php?edit=1&id={$cidade->cidade_id}"; ?>">
+                                <button class="btn btn-primary">Editar</button>
+                            </a>
                             <button class="btn btn-danger" data-delete-message="<?php echo "Deseja deletar a cidade {$cidade->cidade_nome} ?"; ?>" data-delete-url="<?php echo "/modulo-cidade?delete=1&id={$cidade->cidade_id}"; ?>"  onclick="deletarRegistro(this);">
                             <i class="fa fa-remove"></i>
                             </button>
