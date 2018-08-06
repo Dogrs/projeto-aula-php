@@ -14,7 +14,7 @@
                 $_SESSION['msg_sucesso'] = [
                     'title' => 'Sucesso.  ',
                     'icon' => 'fa fa-warning',
-                    'message' => "Cidade {$_POST['nome']} removida com sucesso.",
+                    'message' => "Cidade {$_GET['nome']} removida com sucesso.",
                 ];
                 //$mensagemSucesso = "Cidade removida com sucesso.";
             } 

@@ -7,19 +7,14 @@ include "../comum/side-menu.php";
 <div class="content-wrapper">
 	<div class="container-fluid">
 
-	<?php
-	include "../comum/migalhas.php";
-	?>
+	<?php include "../comum/migalhas.php"; ?>
 
 	<div class="card">
 		<div class="card-header">
         	<i class="fa fa-user"></i> 
 			<?php 
-			if (isset($cidade)) { 
-				echo "Alterar cidade: {$cidade->nome}";
-			} else {
-				echo "Cadastrar cidade";
-			}	
+			if (isset($cidade)) {echo "Alterar cidade: {$cidade->nome}";} 
+			else {echo "Cadastrar Cidade";}	
 			?>
 		</div>
 
@@ -76,7 +71,6 @@ include "../comum/side-menu.php";
 							</select>
 							<?php echo exibirErro($listaErros, 'uf'); ?>
 						</div>
-						
 					</div>
 				</div>
 					
@@ -87,26 +81,24 @@ include "../comum/side-menu.php";
 							<a href="/modulo-cidade/">
 								<button type="button" class="btn btn-default">Cancelar</button>
 							</a>
-							<?php if (isset($mensagemSucesso) && $mensagemSucesso) { ?>
+							<?php if (isset($mensagemSucesso) && $mensagemSucesso)
+							 { ?>
 								<span class="text-success"><?php echo $mensagemSucesso; ?></span>
 							<?php } ?>
 							
 							<?php
-								if (isset($mensagemErro) && $mensagemErro) {
+								if (isset($mensagemErro) && $mensagemErro) 
+								{
 									echo '<span class="text-danger">' . $mensagemErro . '</span>';
 								}
 							?>
 						</div>
 					</div>
-				</div>
-				
+				</div>				
 			</form>
 		</div>
-
 	</div>
 </div>
 <?php /* FIM CONTEUDO */ ?>
 
-<?php
-include "../comum/footer.php";
-?>
+<?php include "../comum/footer.php"; ?>

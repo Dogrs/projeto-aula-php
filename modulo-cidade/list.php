@@ -42,6 +42,8 @@
 
         <a href="/modulo-cidade/cadastro-cidade.php">
             <button class="btn btn-default">Nova Cidade </button>
+            <br>
+            <BR>
         </a>
 
         <table class="table table-bordered table-striped">  
