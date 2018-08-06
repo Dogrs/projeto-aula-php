@@ -43,9 +43,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             WHERE id = {$_POST['id']};
         ";
         $alterado = update_db($sql);
+
+        // ******************* Mensagem novo padrão que mostra em balão superior
         //$_SESSION['msg_sucesso'] = "Cidade {$_POST['nome']} alterada com sucesso.";
         $_SESSION['msg_sucesso'] = [
-            'title' => 'Sucesso.',
+            'title' => 'Sucesso.  ',
             'icon' => 'fa fa-warning',
             'message' => "Cidade {$_POST['nome']} alterada com sucesso.",
         ];
@@ -60,7 +62,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         $mensagemSucesso = '';
         $mensagemErro = '';
         if ($cidadeId) {
-            $mensagemSucesso = "Cidade cadastrada com sucesso.";
+            $_SESSION['msg_sucesso'] = [
+                'title' => 'Sucesso.  ',
+                'icon' => 'fa fa-warning',
+                'message' => "Cidade {$_POST['nome']} cadastrada com sucesso.",
+            ];
+            //$mensagemSucesso = "Cidade cadastrada com sucesso.";
         } else {
             $mensagemErro = "Erro inesperado.";
         }

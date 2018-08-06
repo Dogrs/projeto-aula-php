@@ -11,11 +11,22 @@
             $deletado = deletarRegistro($_GET['id'], 'cidade');
             if ($deletado) 
             {
-                $mensagemSucesso = "Cidade removida com sucesso.";
+                $_SESSION['msg_sucesso'] = [
+                    'title' => 'Sucesso.  ',
+                    'icon' => 'fa fa-warning',
+                    'message' => "Cidade {$_POST['nome']} removida com sucesso.",
+                ];
+                //$mensagemSucesso = "Cidade removida com sucesso.";
             } 
             else 
             {
-                $listaErros['delete'] = "Erro ao remover o cidade.";
+                // alterar classe msg_sucesso para msg_ERRO
+                //$listaErros['delete'] = "Erro ao remover o cidade.";
+                $_SESSION['msg_erro'] = [
+                    'title' => 'ERRO.  ',
+                    'icon' => 'fa fa-warning',
+                    'message' => "Erro ao Excluir a cidade {$_POST['nome']}.",
+                ];
             }
 
             /*
