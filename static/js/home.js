@@ -1,3 +1,6 @@
+
+console.log('home.js');
+
 function deletarRegistro(btn) {
     console.log('btn: ', btn);
     btn = $(btn);
