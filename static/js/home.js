@@ -1,5 +1,5 @@
 
-console.log('home.js');
+//console.log('home.js');
 
 function deletarRegistro(btn) {
     console.log('btn: ', btn);
