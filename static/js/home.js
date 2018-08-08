@@ -26,9 +26,30 @@ function trocarCidades() {
     }
 }
 
+
 // Os codigos dentro do ready serão executados somente depois
 // que a página carregar todo o html.
 $(document).ready(function() {
     $('#uf').on('change', trocarCidades);
     trocarCidades();
 });
+
+/**
+ * Parametros recebidos pelo option:
+ * title,
+ * icon,
+ * message,
+ * type,
+ * delay
+ */
+function exibirAlerta(options) {
+    $.notify({
+        title: options.title,
+        icon: options.icon,
+        message: options.message
+    }, {
+        // settings
+        type: options.type,
+        delay: options.delay
+    });
+}

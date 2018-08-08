@@ -38,7 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET')
         if (isset($_GET['edit']) && isset($_GET['id']) 
         && $_GET['edit'] == '1' && $_GET['id']) 
         {
-            $estado = select_one_db("SELECT id, nome, sigla FROM uf WHERE id={$_GET['id']}");
+            $uf = select_one_db("SELECT id, nome, sigla FROM uf WHERE id={$_GET['id']}");
         }
         include "cadastro-view.php";    
     } 
@@ -49,7 +49,7 @@ else if ($_SERVER['REQUEST_METHOD'] == 'POST')
 
         if (isset($_POST['id']) && $_POST['id'] )
         {
-            $estado = select_one_db("SELECT id, nome, sigla FROM uf WHERE id = {$_POST['id']}");
+            $uf = select_one_db("SELECT id, nome, sigla FROM uf WHERE id = {$_POST['id']}");
         }
 
         

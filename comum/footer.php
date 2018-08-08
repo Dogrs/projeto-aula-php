@@ -33,25 +33,28 @@
 <script src="<?php echo $SITE_URL . "/static/js/home.js"; ?> "></script>
 <?php /* FIM SCRIPTS ADICIONAIS */ ?>	
 
-<?php /* SCRIPTS DO NOTIFY */ ?>
+<?php /* SCRIPTS DO NOTIFY */ 
+if (isset($_SESSION['msg_erro']) && $_SESSION['msg_erro'])
+  {
+    ?>
+    <script type="text/javascript">
+      exibirAlerta(<?php echo json_encode($_SESSION['msg_sucesso']); ?>);
+    </script>
+    <?php
+    unset($_SESSION['msg_erro']);
+  }
 
-<?php /* MENSAGEM DE SUCESSO */ ?>
-<?php if (isset($_SESSION['msg_sucesso']) && $_SESSION['msg_sucesso']) 
-{ ?>
-  <script type="text/javascript">
-    $.notify(<?php echo json_encode($_SESSION['msg_sucesso']); ?>,
-    {type: 'success',delay: 5000});
-  </script>
-  <?php  unset($_SESSION['msg_sucesso']);}?>
-
-<?php /* MENSAGEM DE ERRO */ ?>
-<?php if (isset($_SESSION['msg_erro']) && $_SESSION['msg_erro']) 
-{ ?>
-  <script type="text/javascript">
-    $.notify(<?php echo json_encode($_SESSION['msg_erro']); ?>,
-    {type: 'danger',delay: 5000});
-  </script>
-  <?php  unset($_SESSION['msg_erro']);}?>  
+if (isset($_SESSION['msg_erro']) && $_SESSION['msg_erro']) 
+  {
+    ?>
+    <script type="text/javascript">
+    exibirAlerta(<?php echo json_encode($_SESSION['msg_erro']); ?>);
+    </script>
+    <?php
+    unset($_SESSION['msg_erro']);
+  }
+  
+ ?>
 
 </body>
 </html>

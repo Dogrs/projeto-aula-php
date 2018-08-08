@@ -8,35 +8,42 @@
         if (isset($_GET['delete']) && isset($_GET['id']) 
                 && $_GET['delete']== '1' && $_GET['id'])
         {
-            //chama função em UTILS, que deleta o id xxx da tabela uf do banco
-            $deletado = deletarRegistro($_GET['id'], 'uf'); 
-            if ($deletado) 
-            {
-                //dd($_GET);
-                $_SESSION['msg_sucesso'] = [
-                    'title' => 'Sucesso.  ',
-                    'icon' => 'fa fa-warning',
-                    'message' => "Estado {$_POST['nome']} removido com sucesso.",
-                ];
+            $uf = select_one_db("SELECT nome FROM uf WHERE id={$_GET['id']};");
+            $quantidadeCidades = select_one_db("
+            SELECT
+                count(id) AS count
+            FROM cidade
+            WHERE
+                uf_id = {$_GET['id']};
+        ");
+        
+        if ($quantidadeCidades->count == 0) {
+            $deletado = deletarRegistro($_GET['id'], 'uf');
+        
+            if ($deletado) {
+                alertSuccess("Sucesso", "Estado {$uf->nome} removido com sucesso.");
+            } else {
+                alertError('Atenção!', "Erro ao remover estado.");
+            }
+
             } 
             else 
             {
-                $_SESSION['msg_erro'] = [
-                    'title' => 'ERRO.  ',
-                    'icon' => 'fa fa-warning',
-                    'message' => "Erro ao Excluir o Estado {$_POST['nome']}.",
-                ];
+                alertError('Atenção!', "Existem {$quantidadeCidades->count} cidades para este estado. Remova todas as cidades antes de remover o estado.", 10000);
             }
+            redirect('/modulo-estado/');
         }
-        $listaEstados = select_db("
+
+        
+        $listaUfs = select_db("
                         SELECT 
-                            id AS estado_id, 
-                            nome AS estado_nome, 
-                            sigla AS estado_sigla 
+                            id, 
+                            nome, 
+                            sigla 
                         FROM 
                             uf
                         ORDER BY 
-                            nome ASC
+                            uf.nome ASC
                             ");
         //dd($listaEstados);
         include "list.php";

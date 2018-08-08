@@ -65,17 +65,43 @@ function deletarRegistro($id, $tableName)
     // String do SQL utilizando chaves ({}) para concatenar.
     //$lista = select_db("SELECT id, nome FROM {$tableName} WHERE id = {$id}");
     // String do SQL utilizando ponto (.) para concatenar.
-    $retorno = false;
+    
+    /*$retorno = false;
     $lista = select_db("SELECT id, nome FROM " . $tableName . " WHERE id = " . $id);
     if (count($lista) > 0 && $lista[0]->id) 
     {
         $retorno = delete_db("DELETE FROM {$tableName} WHERE id = {$id}");
     }
-    return $retorno;
+    return $retorno;*/
+
+    return delete_db("DELETE FROM {$tableName} WHERE id = {$id}");
 }
 
 /**
  * Direciona o usuario para a $url recebida no parametro.
  */
 function redirect($url){die("<script>window.location.href = '{$url}';</script>");}
+
+function alertSuccess($titulo, $mensagem, $delay=3000, $icone='fa fa-warning') 
+{
+    $_SESSION['msg_sucesso'] = [
+        'title' => $titulo,
+        'icon' => $icone,
+        'message' => $mensagem,
+        'type' => "success",
+        'delay' => $delay,
+    ];
+}
+
+function alertError($titulo, $mensagem, $delay=3000, $icone='fa fa-warning')
+ {
+    $_SESSION['msg_erro'] = [
+        'title' => $titulo,
+        'icon' => $icone,
+        'message' => $mensagem,
+        'type' => "danger",
+        'delay' => $delay,
+    ];
+}
+
 ?>

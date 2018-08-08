@@ -42,15 +42,15 @@
                 </tr>
             </thead>
             <tbody> 
-                <?php foreach($listaEstados as $estado) { ?>
+                <?php foreach($listaUfs as $uf) { ?>
                     <tr> 
-                        <th> <?php echo $estado->estado_nome; ?> </th>
-                        <th> <?php echo "{$estado->estado_sigla}"; ?> </th>
+                        <th> <?php echo $uf->nome; ?> </th>
+                        <th> <?php echo "{$uf->sigla}"; ?> </th>
                         <th>
-                            <a href= "<?php echo "/modulo-estado/cadastro-estado.php?edit=1&id={$estado->estado_id}"; ?>">
+                            <a href= "<?php echo "/modulo-estado/cadastro-estado.php?edit=1&id={$uf->id}"; ?>">
                                 <button class="btn btn-primary">Editar</button>
                             </a>
-                            <button class="btn btn-danger" data-delete-message="<?php echo "Deseja deletar o estado {$estado->estado_nome} ?"; ?>" data-delete-url="<?php echo "/modulo-estado?delete=1&id={$estado->estado_id}"; ?>"  onclick="deletarRegistro(this);">
+                            <button class="btn btn-danger" data-delete-message="<?php echo "Deseja deletar o estado {$uf->nome} ?"; ?>" data-delete-url="<?php echo "/modulo-estado?delete=1&id={$uf->id}"; ?>"  onclick="deletarRegistro(this);">
                             <i class="fa fa-remove"></i>
                             </button>
                         </th>

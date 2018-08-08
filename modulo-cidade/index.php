@@ -9,25 +9,12 @@
                 && $_GET['delete']== '1' && $_GET['id'])
         {
             $deletado = deletarRegistro($_GET['id'], 'cidade');
-            if ($deletado) 
-            {
-                $_SESSION['msg_sucesso'] = [
-                    'title' => 'Sucesso.  ',
-                    'icon' => 'fa fa-warning',
-                    'message' => "Cidade {$_GET['nome']} removida com sucesso.",
-                ];
-                //$mensagemSucesso = "Cidade removida com sucesso.";
-            } 
-            else 
-            {
-                // alterar classe msg_sucesso para msg_ERRO
-                //$listaErros['delete'] = "Erro ao remover o cidade.";
-                $_SESSION['msg_erro'] = [
-                    'title' => 'ERRO.  ',
-                    'icon' => 'fa fa-warning',
-                    'message' => "Erro ao Excluir a cidade {$_POST['nome']}.",
-                ];
+            if ($deletado) {
+                $mensagemSucesso = "Cidade removida com sucesso.";
+            } else {
+                $listaErros['delete'] = "Erro ao remover o cidade.";
             }
+        }
 
             /*
             $lista=select_db("SELECT id,nome from cidade WHERE id =" . $_GET['id']);
@@ -43,7 +30,7 @@
                     $listaErros['delete'] = "Erro ao remover o registro id = {$_GET['id']}.";
                 }
             }*/
-        }
+        
 
         //$listaCidades = select_db("SELECT id, nome, uf_id FROM cidade ORDER BY nome ASC, id ;");
         $listaCidades = select_db("

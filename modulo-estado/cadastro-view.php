@@ -13,7 +13,7 @@
 			<div class="card-header">
         		<i class="fa fa-user"></i>
 				<?php
-				if (isset($estado)) {echo "Alterar Estado: {$estado->nome}";}
+				if (isset($uf)) {echo "Alterar Estado: {$uf->nome}";}
 				else {echo "Cadastrar Estado";}
 				?>
 			</div>
@@ -21,15 +21,15 @@
 		<div class="card-body">
 			<form action="<?php echo $SITE_URL . "/modulo-estado/cadastro-estado.php"; ?>" id="form-cadastro" method="POST">
 
-				<?php if (isset($estado)) { ?>
-					<input type="hidden" name="id" value="<?php echo $estado->id; ?>">
+				<?php if (isset($uf)) { ?>
+					<input type="hidden" name="id" value="<?php echo $uf->id; ?>">
 				<?php } ?>
 
 				<div class="form-group">
 					<div class="form-row ">
 						<div class="col-md-8">
 							<label for="nome">Nome</label>
-							<input class="form-control" name="nome" id="nome" placeholder="Nome do Estado" type="text" value="<?php echo ( isset($estado) ) ? $estado->nome : ''; ?>" />
+							<input class="form-control" name="nome" id="nome" placeholder="Nome do Estado" type="text" value="<?php echo ( isset($uf) ) ? $uf->nome : ''; ?>" />
 							<?php
 								/* Validação do input nome (este codigo foi passado para a função exibirErro) */
 								if ( isset($listaErros['nome']) && $listaErros['nome'] )
@@ -41,7 +41,7 @@
 						</div>
 						<div class="col-md-4">
 							<label for="sigla">Sigla</label> <?php /* o for, leva ao id de baixo, quando se clica no "titulo do campo" */ ?>
-							<input class="form-control" name="sigla" id="sigla" placeholder="Sigla do Estado" type="text" value="<?php echo ( isset($estado) ) ? $estado->sigla : ''; ?>"/>
+							<input class="form-control" name="sigla" id="sigla" placeholder="Sigla do Estado" type="text" value="<?php echo ( isset($uf) ) ? $uf->sigla : ''; ?>"/>
 							<?php
 								/* Validação do input nome (este codigo foi passado para a função exibirErro) */
 								if ( isset($listaErros['sigla']) && $listaErros['sigla'] ) 
