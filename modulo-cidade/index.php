@@ -9,11 +9,8 @@
                 && $_GET['delete']== '1' && $_GET['id'])
         {
             $deletado = deletarRegistro($_GET['id'], 'cidade');
-            if ($deletado) {
-                $mensagemSucesso = "Cidade removida com sucesso.";
-            } else {
-                $listaErros['delete'] = "Erro ao remover o cidade.";
-            }
+            if ($deletado) {$mensagemSucesso = "Cidade removida com sucesso.";}
+            else {$listaErros['delete'] = "Erro ao remover o cidade.";}
         }
 
             /*

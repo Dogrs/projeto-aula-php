@@ -13,8 +13,8 @@
 			<div class="card-header">
         		<i class="fa fa-user"></i>
 				<?php
-				if (isset($uf)) {echo "Alterar Estado: {$uf->nome}";}
-				else {echo "Cadastrar Estado";}
+					if (isset($uf)) {echo "Alterar Estado: {$uf->nome}";}
+					else {echo "Cadastrar Estado";}
 				?>
 			</div>
 
@@ -30,28 +30,16 @@
 						<div class="col-md-8">
 							<label for="nome">Nome</label>
 							<input class="form-control" name="nome" id="nome" placeholder="Nome do Estado" type="text" value="<?php echo ( isset($uf) ) ? $uf->nome : ''; ?>" />
-							<?php
-								/* Validação do input nome (este codigo foi passado para a função exibirErro) */
-								if ( isset($listaErros['nome']) && $listaErros['nome'] )
-								{
-							?>
-								<span class="text-danger"><?php echo $listaErros['nome']; ?></span>
-								<?php
-								} ?>
+							<?php echo exibirErro($listaErros, 'nome'); ?>
 						</div>
 						<div class="col-md-4">
 							<label for="sigla">Sigla</label> <?php /* o for, leva ao id de baixo, quando se clica no "titulo do campo" */ ?>
 							<input class="form-control" name="sigla" id="sigla" placeholder="Sigla do Estado" type="text" value="<?php echo ( isset($uf) ) ? $uf->sigla : ''; ?>"/>
-							<?php
-								/* Validação do input nome (este codigo foi passado para a função exibirErro) */
-								if ( isset($listaErros['sigla']) && $listaErros['sigla'] ) 
-								{ ?>
-									<span class="text-danger"><?php echo $listaErros['sigla']; ?></span>
-							<?php
-								} ?>
+							<?php echo exibirErro($listaErros, 'sigla'); ?>
 						</div>
 					</div>
 				</div>
+				
 				<div class="form-group">
 					<div class="form-row">
 						<div class="col-md-12">

@@ -4,6 +4,12 @@ include '../config.php';
 /**
  * Valida formulario simples
  */
+function validarSigla($sigla) //Valida siglas, verifica se tem 2 caracteres e se são letras
+{
+    $padrao = "/^([a-zA-Z]{2})$/";
+    if(preg_match($padrao,$sigla)){ return true;}
+    return false;
+}
 
 function validarFormularioSimples($post) 
 {
@@ -13,12 +19,7 @@ function validarFormularioSimples($post)
         $listaErros['nome'] = "Nome obrigatório.";
     }
 
-    function validarSigla($sigla) //Valida siglas, verifica se tem 2 caracteres e se são letras
-    {
-        $padrao = "/^([a-zA-Z]{2})$/";
-        if(preg_match($padrao,$sigla)){ return true;}
-        return false;
-    }
+
 
     if (!isset ($post['sigla'])  || !$post['sigla'])
     {
@@ -44,7 +45,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET')
     } 
 else if ($_SERVER['REQUEST_METHOD'] == 'POST') 
     {
-        echo "Formulario enviado <br>";
         $listaErros = validarFormularioSimples($_POST);
 
         if (isset($_POST['id']) && $_POST['id'] )
@@ -57,26 +57,12 @@ else if ($_SERVER['REQUEST_METHOD'] == 'POST')
         else if (isset($_POST['id']) && $_POST['id'])
         {
             // Executo o update
-            
             $sql = "UPDATE uf SET nome = '{$_POST['nome']}', sigla = '".strtoupper ($_POST['sigla'])."' WHERE id = {$_POST['id']};";
             //dd($sql);
-
             $alterado = update_db($sql);
-
-            $_SESSION['msg_sucesso'] = [
-                'title' => 'Sucesso.  ',
-                'icon' => 'fa fa-warning',
-                'message' => "Estado {$_POST['nome']} alterado com sucesso.",
-            ];
+            alertSuccess("Sucesso.", "Estado {$_POST['nome']} alterado com sucesso.");
             redirect("/modulo-estado/");
         } 
-
-            /*if (count($listaErros) > 0) {include "cadastro-view.php";}
-            else if (isset($_POST['id']) && $_POST['id'] ) {
-                                // Executo o update
-                $sql = "UPDATE cidade SET nome = '{$_POST['nome']}', uf_id = {$_POST['uf']}WHERE id = {$_POST['id']};";
-                $alterado = update_db($sql);*/
-
         else 
         {
             // Executa o insert
@@ -92,14 +78,7 @@ else if ($_SERVER['REQUEST_METHOD'] == 'POST')
             $mensagemSucesso = '';
             $mensagemErro = '';
 
-            if ($estadoId) 
-            {
-                $_SESSION['msg_sucesso'] = [
-                    'title' => 'Sucesso.  ',
-                    'icon' => 'fa fa-warning',
-                    'message' => "Estado {$_POST['nome']} cadastrado com sucesso.",
-                ];
-            }
+            if ($estadoId) {$mensagemSucesso = "Estado cadastrado com sucesso.";}
             else {$mensagemErro = "Erro Inesperado";}
             include "cadastro-view.php";
         }

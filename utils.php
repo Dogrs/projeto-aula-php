@@ -9,7 +9,7 @@
  */
 function site_url()
 {
-    return null;
+    return $SITE_URL;
 }
 
 /**
@@ -36,15 +36,14 @@ function d($valor)
 /**
  * Valida o email
  */
-function validarEmail($email) {
+function validarEmail($email) 
+{
     $conta = "/^[a-zA-Z0-9\._-]+@";
     $domino = "[a-zA-Z0-9\._-]+.";
     $extensao = "([a-zA-Z]{2,4})$/";
     $pattern = $conta.$domino.$extensao;
 
-    if (preg_match($pattern, $email)) {
-        return true;
-    }
+    if (preg_match($pattern, $email)) {return true;}
     return false;
 }
 

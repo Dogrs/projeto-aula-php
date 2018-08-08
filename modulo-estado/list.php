@@ -44,16 +44,16 @@
             <tbody> 
                 <?php foreach($listaUfs as $uf) { ?>
                     <tr> 
-                        <th> <?php echo $uf->nome; ?> </th>
-                        <th> <?php echo "{$uf->sigla}"; ?> </th>
-                        <th>
+                        <td> <?php echo $uf->nome; ?> </td>
+                        <td> <?php echo $uf->sigla; ?> </td>
+                        <td>
                             <a href= "<?php echo "/modulo-estado/cadastro-estado.php?edit=1&id={$uf->id}"; ?>">
                                 <button class="btn btn-primary">Editar</button>
                             </a>
                             <button class="btn btn-danger" data-delete-message="<?php echo "Deseja deletar o estado {$uf->nome} ?"; ?>" data-delete-url="<?php echo "/modulo-estado?delete=1&id={$uf->id}"; ?>"  onclick="deletarRegistro(this);">
                             <i class="fa fa-remove"></i>
                             </button>
-                        </th>
+                        </td>
                     </tr>
                 <?php } ?>
             </tbody>
@@ -61,6 +61,5 @@
     </div>
 </div>
 
-<script type="text/javascript"></script>
 <?php include "../comum/footer.php"; ?>
 

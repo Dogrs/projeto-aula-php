@@ -58,40 +58,25 @@
             <tbody> 
                 <?php foreach($listaCidades as $cidade) { ?>
                     <tr> 
-                        <th> <?php echo $cidade->cidade_nome; ?> </th>
+                        <td> <?php echo $cidade->cidade_nome; ?> </td>
                         <?php /*<th> <?php echo $cidade->uf_nome; ?> (<?php echo $cidade->uf_sigla; ?>) </th> */?>
-                        <th> <?php echo "{$cidade->uf_nome} ({$cidade->uf_sigla})"; ?> </th>
-                        <th>
+                        <td> <?php echo "{$cidade->uf_nome} ({$cidade->uf_sigla})"; ?> </td>
+                        <td>
                             <a href= "<?php echo "/modulo-cidade/cadastro-cidade.php?edit=1&id={$cidade->cidade_id}"; ?>">
                                 <button class="btn btn-primary">Editar</button>
                             </a>
                             <button class="btn btn-danger" data-delete-message="<?php echo "Deseja deletar a cidade {$cidade->cidade_nome} ?"; ?>" data-delete-url="<?php echo "/modulo-cidade?delete=1&id={$cidade->cidade_id}"; ?>"  onclick="deletarRegistro(this);">
                             <i class="fa fa-remove"></i>
                             </button>
-                        </th>
+                        </td>
                     </tr>
                 <?php } ?>
-
             </tbody>
-
         </table>
     </div>
 </div>
 
-<script type="text/javascript"> 
-
-/*function deletarRegistro(id)
-{
-    var ok = confirm("Deletar o registro ID=  " + id + "?")
-    if (ok){ windows.location.href= "/modulo-cidade?delete=1&id="+id;};
-
-
-    //console.log("ID: ",id);
-    //console.log($('.table'));
-
-}*/
-
-</script>
+<script type="text/javascript"> </script>
 
 <?php include "../comum/footer.php"; ?>
 

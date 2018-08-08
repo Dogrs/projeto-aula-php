@@ -20,13 +20,12 @@ function connect_db()
         );
         // set the PDO error mode to exception
         //$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    } catch(PDOException $e) {
-        echo "Connection failed: " . $e->getMessage();
-    }
+    } catch(PDOException $e) {echo "Connection failed: " . $e->getMessage();}
     return $conn;
 }
 
-function error_db($e, $sql) {
+function error_db($e, $sql) 
+{
     echo "<div style='color: red !important; background-color: #FFF !important;'> ERRO NO BANCO DE DADOS:<br>";
     echo 'SQL: <pre>' . $sql . "<br> ERRO: " . $e->getMessage() . '</pre>';
     echo "</div>";
