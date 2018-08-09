@@ -14,11 +14,28 @@ function validarSigla($sigla) //Valida siglas, verifica se tem 2 caracteres e se
 function validarFormularioSimples($post) 
 {
     $listaErros = [];
-    if (!isset($post['nome']) || !$post['nome']) 
+    
+    if (!isset($post['primeiro_nome']) || !$post['primeiro_nome']) {$listaErros['primeiro_nome'] = "Primeiro nome obrigatório.";}
+    if (!isset($post['segundo_nome']) || !$post['segundo_nome']) {$listaErros['segundo_nome'] = "Segundo nome obrigatório.";}
+    
+    if (!isset($post['email']) || !$post['email']) {$listaErros['email'] = "E-mail obrigatório.";}
+    else if ( !validarEmail($post['email']) ) {$listaErros['email'] = "Informe um email válido.";}
+
+    if (!isset($post['cpf']) || !$post['cpf']) {$listaErros['cpf'] = "CPF obrigatório.";}
+    else
     {
-        $listaErros['nome'] = "Nome obrigatório.";
+        $cpf_sem_mascara = removerMascaraCpf($post['cpf']);
+        if (!validarCpf($cpf_sem_mascara)){$listaErros['cpf'] = "CPF INVÁLIDO.";}
     }
 
+    if (!isset($post['data_nascimento']) || !$post['data_nascimento']) {$listaErros['data_nascimento'] = "Data de Nascimento obrigatória.";}
+    if (!isset($post['tipo']) || !$post['tipo']) {$listaErros['tipo'] = "Tipo obrigatório.";}
+    if (!isset($post['endereco']) || !$post['endereco']) {$listaErros['endereco'] = "Endereço obrigatório.";}
+    if (!isset($post['cep']) || !$post['cep']) {$listaErros['cep'] = "CEP obrigatório.";}
+    if (!isset($post['bairro']) || !$post['bairro']) {$listaErros['bairro'] = "Bairro obrigatório.";}
+    if (!isset($post['numero']) || !$post['numero']) {$listaErros['numero'] = "Número obrigatório.";}
+    if (!isset($post['cidade']) || !$post['cidade']) {$listaErros['cidade'] = "Cidade obrigatório.";}
+    if (!isset($post['estado']) || !$post['estado']) {$listaErros['estado'] = "Estado obrigatório.";}
 
 
     if (!isset ($post['sigla'])  || !$post['sigla'])
@@ -32,6 +49,8 @@ function validarFormularioSimples($post)
     //   else if (strlen($post['sigla']) != 2) { //verificação simples de se tem 2 caracteres... funcionando  
     return $listaErros;
 }
+
+
 
 if ($_SERVER['REQUEST_METHOD'] == 'GET') 
     {
