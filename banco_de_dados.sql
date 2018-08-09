@@ -1,18 +1,22 @@
 CREATE TABLE pessoa (
     id int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    primeiro_nome varchar(255) DEFAULT NULL,
-    segundo_nome varchar(255) DEFAULT NULL,
-    email varchar(255) DEFAULT NULL,
-    bairro varchar(255) DEFAULT NULL,
-    numero VARCHAR(255) DEFAULT NULL,
-    cep VARCHAR(255) DEFAULT NULL,
-    cidade_id int(11)DEFAULT NULL,
+    primeiro_nome varchar(255) NOT NULL,
+    segundo_nome varchar(255) NOT NULL,
+    email varchar(255) NOT NULL UNIQUE KEY,
+    cpf varchar(14) NOT NULL UNIQUE KEY,
+    endereco varchar(255) NOT NULL,
+    bairro varchar(255) NOT NULL,
+    numero VARCHAR(255) NOT NULL,
+    cep VARCHAR(9) NOT NULL,
+    cidade_id int NOT NULL,
     data_nascimento timestamp NOT NULL,
-    tipo int (11)DEFAULT NULL,
-    data_criacao timestamp NOT NULL,
-    data_alteracao timestamp NOT NULL,
-    FOREIGN KEY (cidade_id) REFERENCES cidade(id)
+    tipo int (1) NOT NULL,
+    data_criacao timestamp NOT NULL DEFAULT NOW(),
+    data_alteracao timestamp NOT NULL DEFAULT NOW(),
+    FOREIGN KEY pessoa_cidade_id (cidade_id) REFERENCES cidade(id)
 )
+
+
 
 CREATE TABLE uf(
     id int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,

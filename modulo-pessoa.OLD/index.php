@@ -15,11 +15,11 @@
         if ($quantidadeCidades->count == 0) 
         {
             $deletado = deletarRegistro($_GET['id'], 'uf');
-            if ($deletado) {alertSuccess("Sucesso", "pessoa {$uf->nome} removido com sucesso.");} 
-            else {alertError('Atenção!', "Erro ao remover pessoa.");}
+            if ($deletado) {alertSuccess("Sucesso", "Estado {$uf->nome} removido com sucesso.");} 
+            else {alertError('Atenção!', "Erro ao remover estado.");}
         } 
-        else {alertError('Atenção!', "Existem {$quantidadeCidades->count} cidades para este pessoa. Remova todas as cidades antes de remover o pessoa.", 10000);}
-        redirect('/modulo-pessoa/');
+        else {alertError('Atenção!', "Existem {$quantidadeCidades->count} cidades para este estado. Remova todas as cidades antes de remover o estado.", 10000);}
+        redirect('/modulo-estado/');
     }
         
     $listaUfs = select_db("SELECT id, nome, sigla FROM uf ORDER BY uf.nome ASC");

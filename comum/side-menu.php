@@ -22,6 +22,13 @@
                         <span class="nav-link-text">Cidades</span>
                     </a>
                 </li>
+                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
+                    <a class="nav-link" href="/modulo-pessoa/">  
+                        <a class="nav-link" href="/modulo-pessoa/">
+                        <i class="fa fa-fw fa-list"></i>
+                        <span class="nav-link-text">Pessoas</span>
+                    </a>
+                </li>
             </ul>
 
             <ul class="navbar-nav sidenav-toggler">
