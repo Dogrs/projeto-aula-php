@@ -93,14 +93,36 @@
 					<div class="form-row ">
 						<div class="col-md-6">
 							<label for="cidade">Cidade</label>
-							<input class="form-control" name="cidade" id="cidade" placeholder="Cidade" type="text" value="<?php echo ( isset($pessoa) ) ? $pessoa->cidade : ''; ?>" />
+							<select class="form-control" name="cidades" id="cidades" >
+								<option value="">Selecione um estado</option>
+								<?php
+								// ForEach
+								//console.log ('111');
+								//dd($listaCidades);
+								foreach ($listaCidades as $Cidades) 
+								{
+									$checked = '';
+									//if (isset($cidades) && $cidades->cidades_id == $cidades->id) {$checked = "selected";}
+									echo "<option {$checked} value=\"{$Cidades->id}\"> {$Cidades->nome} </option>";
+								}
+								?>
+							</select>
 							<?php echo exibirErro($listaErros, 'cidade'); ?>
 						</div>
 						<div class="col-md-6">
 							<label for="estado">Estado</label>
-							<select class="form-control" name="estado" id="estado" type="text" ?>" />
-							<option value="">Selecione um estado</option>
-								<?php foreach ($listaUf as $uf) {echo "<option value=\"" . $uf->id . "\">" . $uf->nome . "</option>";}?>
+							<select class="form-control" name="estado" id="estado" >
+								<option value="">Selecione um estado</option>
+								<?php
+								// ForEach
+								
+								foreach ($listaUf as $uf) 
+								{
+									$checked = '';
+									//if (isset($cidade) && $cidade->uf_id == $uf->id) {$checked = "selected";}
+									echo "<option {$checked} value=\"{$uf->id}\"> {$uf->nome} ({$uf->sigla})</option>";
+								}
+								?>
 							</select>
 							<?php echo exibirErro($listaErros, 'estado'); ?>
 						</div>
@@ -133,5 +155,6 @@
 	</div>
 </div>
 <?php /* FIM CONTEUDO */ ?>
+
 
 <?php include "../comum/footer.php"; ?>

@@ -11,9 +11,11 @@ function validarSigla($sigla) //Valida siglas, verifica se tem 2 caracteres e se
     return false;
 }
 
+
 function validarFormularioSimples($post) 
-{
+{//dd($post);
     $listaErros = [];
+   // dd($post);
     
     if (!isset($post['primeiro_nome']) || !$post['primeiro_nome']) {$listaErros['primeiro_nome'] = "Primeiro nome obrigatório.";}
     if (!isset($post['segundo_nome']) || !$post['segundo_nome']) {$listaErros['segundo_nome'] = "Segundo nome obrigatório.";}
@@ -34,23 +36,19 @@ function validarFormularioSimples($post)
     if (!isset($post['cep']) || !$post['cep']) {$listaErros['cep'] = "CEP obrigatório.";}
     if (!isset($post['bairro']) || !$post['bairro']) {$listaErros['bairro'] = "Bairro obrigatório.";}
     if (!isset($post['numero']) || !$post['numero']) {$listaErros['numero'] = "Número obrigatório.";}
-    if (!isset($post['cidade']) || !$post['cidade']) {$listaErros['cidade'] = "Cidade obrigatório.";}
+    if (!isset($post['cidades']) || !$post['cidades']) {$listaErros['cidades'] = "Cidade obrigatório.";}
     if (!isset($post['estado']) || !$post['estado']) {$listaErros['estado'] = "Estado obrigatório.";}
 
 
-    if (!isset ($post['sigla'])  || !$post['sigla'])
-    {
-        $listaErros['sigla'] = "pessoa obrigatório.";
-    } 
-    else if (!validarSigla($post['sigla']))//verifica se tem 2 caracteres letras
-    {
-        $listaErros['sigla'] = "Informe uma sigla com 2 letras.";
-    }
-    //   else if (strlen($post['sigla']) != 2) { //verificação simples de se tem 2 caracteres... funcionando  
-    return $listaErros;
+    
 }
 
 
+// Busca todos os UFs (estados) do banco 
+$listaUf        = select_db("SELECT id, nome, sigla FROM uf     ORDER BY nome ASC;");
+$listaCidades   = select_db("SELECT id, nome, uf_id FROM cidade ORDER BY nome ASC;");
+//dd($listaCidades);
+//dd($listaUf);
 
 if ($_SERVER['REQUEST_METHOD'] == 'GET') 
     {
@@ -76,7 +74,20 @@ else if ($_SERVER['REQUEST_METHOD'] == 'POST')
         else if (isset($_POST['id']) && $_POST['id'])
         {
             // Executo o update
-            $sql = "UPDATE uf SET nome = '{$_POST['nome']}', sigla = '".strtoupper ($_POST['sigla'])."' WHERE id = {$_POST['id']};";
+            $sql = "UPDATE uf SET 
+                primeiro_nome   = '{$_POST['primeiro_nome']}', 
+                segundo_nome    = '{$_POST['segundo_nome']}',
+                email           = '{$_POST['email']}',
+                cpf             = '{$_POST['cpf']}',
+                data_nascimento = '{$_POST['data_nascimento']}',
+                tipo            = '1',
+                endereco        = '{$_POST['endereco']}',
+                cep             = '{$_POST['cep']}',
+                bairro          = '{$_POST['bairro']}',
+                numero          = '{$_POST['numero']}',
+                cidades         = '{$_POST['cidades']}',
+                estado          = '{$_POST['estado']}'
+                WHERE id = {$_POST['id']};";
             //dd($sql);
             $alterado = update_db($sql);
             alertSuccess("Sucesso.", "pessoa {$_POST['nome']} alterado com sucesso.");
@@ -84,9 +95,36 @@ else if ($_SERVER['REQUEST_METHOD'] == 'POST')
         } 
         else 
         {
+            
+
+            //$sql = "INSERT INTO cidade (nome, uf_id) VALUES('".$_POST['nome']."',".$_POST['uf'].");";
             // Executa o insert
-            $sql = "INSERT INTO uf (nome,sigla) 
-            VALUES('".$_POST['nome']."', '".strtoupper ($_POST['sigla'])."');";
+            $sql = "INSERT INTO pessoa 
+                (   primeiro_nome,
+                    segundo_nome,
+                    email,
+                    cpf,
+                    data_nascimento,
+                    tipo,
+                    endereco,
+                    cep,
+                    bairro,
+                    numero,
+                    cidade_id) 
+                VALUES(
+                    '{$_POST['primeiro_nome']}',
+                    '{$_POST['segundo_nome']}',
+                    '{$_POST['email']}',
+                    '{$_POST['cpf']}',
+                    '{$_POST['data_nascimento']}',
+                    '1',
+                    '{$_POST['endereco']}',
+                    '{$_POST['cep']}',
+                    '{$_POST['bairro']}',
+                    '{$_POST['numero']}',
+                    '{$_POST['cidades']}
+                    ')";
+//dd($sql);
             //$sql = "INSERT INTO uf (nome,sigla) VALUES('xx','yy') " --> outra forma de fazer as string do SQL 1a PARTE coloca xx e yy
             //$sql = "INSERT INTO uf (nome,sigla) VALUES('{}','{}') " --> Substitui por Chaves
             //$sql = "INSERT INTO uf (nome,sigla) VALUES('{$_POST['nome']}','{$_POST['sigla']}') "  --> ajuste com o campo, porem não funciona to UPPER
