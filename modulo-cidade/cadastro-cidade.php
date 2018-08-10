@@ -40,16 +40,7 @@ else if (isset($_POST['id']) && $_POST['id'] )
             WHERE id = {$_POST['id']};
             ";
     $alterado = update_db($sql);
-
-    // ******************* Mensagem novo padrão que mostra em balão superior
-    //$_SESSION['msg_sucesso'] = "Cidade {$_POST['nome']} alterada com sucesso.";
-
-    //VERIFICAR
-    $_SESSION['msg_sucesso'] = [
-        'title' => 'Sucesso.  ',
-        'icon' => 'fa fa-warning',
-        'message' => "Cidade {$_POST['nome']} alterada com sucesso.",
-    ];
+    {alertSuccess("Sucesso.", "Cidade {$_POST['nome']} cadastrada com sucesso.");}
     redirect("/modulo-cidade/");
 } 
 else 
@@ -61,8 +52,8 @@ else
     // Variaveis para controle de erros.
     $mensagemSucesso = '';
     $mensagemErro = '';
-    if ($cidadeId) {$mensagemSucesso = "Cidade cadastrada com sucesso.";}  //VERIFICAR
-    else {$mensagemErro = "Erro inesperado.";}
+    if ($cidadeId) {alertSuccess("Sucesso.", "Cidade {$_POST['nome']} cadastrada com sucesso.");}
+    else {alertError('Atenção!', "Erro Inesperado");}
     include "cadastro-view.php";
 }
 }

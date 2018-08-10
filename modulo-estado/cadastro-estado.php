@@ -78,7 +78,7 @@ else if ($_SERVER['REQUEST_METHOD'] == 'POST')
             $mensagemSucesso = '';
             $mensagemErro = '';
 
-            if ($estadoId) {alertSuccess("Sucesso.", "Estado {$_POST['nome']} Cadastrado com sucesso.");}
+            if ($estadoId) {alertSuccess("Sucesso.", "Estado {$_POST['nome']} cadastrado com sucesso.");}
             else {alertError('Atenção!', "Erro Inesperado");} 
             include "cadastro-view.php";
         }

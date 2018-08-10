@@ -1,4 +1,4 @@
-<?php
+<?php //modulo-pessoa/list.php
     include "../comum/head.php";
     include "../comum/side-menu.php";
 ?>

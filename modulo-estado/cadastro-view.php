@@ -1,4 +1,4 @@
-<?php 
+<?php //modulo-estado/cadastro-view.php
 	include "../comum/head.php"; //volta uma pasta da atual entra no diretorio comum e le o head
 	include "../comum/side-menu.php";
 ?>

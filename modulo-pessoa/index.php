@@ -1,4 +1,4 @@
-<?php
+<?php //modulo-pessoa/index.php
     include "../config.php";
     
     if ($_SERVER['REQUEST_METHOD'] == 'GET')

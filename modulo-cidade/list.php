@@ -1,5 +1,4 @@
-<?php
-// List.php
+<?php //modulo-cidade/list.php
     include "../comum/head.php";
     include "../comum/side-menu.php";
 ?>
@@ -27,19 +26,8 @@
                 </div>
                 <?php
             }
-            /*
-            if (isset($_SESSION['msg_sucesso']) && $_SESSION['msg_sucesso']) 
-            {
-                <div class="alert alert-success">
-                    <?php echo $_SESSION['msg_sucesso']; ?>
-                </div>
-                unset($_SESSION['msg_sucesso']);    
-            }                   
-            */
                 ?>
         
-
-
 
         <a href="/modulo-cidade/cadastro-cidade.php">
             <button class="btn btn-default">Nova Cidade </button>
