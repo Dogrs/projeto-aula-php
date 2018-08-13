@@ -56,6 +56,7 @@ else if ($_SERVER['REQUEST_METHOD'] == 'POST')
         if (count($listaErros) > 0) {include "cadastro-view.php";}
         else if (isset($_POST['id']) && $_POST['id'])
         {
+            //dd($_POST);
             // Executo o update
             $sql = "UPDATE uf SET nome = '{$_POST['nome']}', sigla = '".strtoupper ($_POST['sigla'])."' WHERE id = {$_POST['id']};";
             //dd($sql);

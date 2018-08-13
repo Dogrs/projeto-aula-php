@@ -25,7 +25,7 @@
                 <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
                     <a class="nav-link" href="/modulo-pessoa/">  
                         <a class="nav-link" href="/modulo-pessoa/">
-                        <i class="fa fa-fw fa-list"></i>
+                        <i class="fa fa-fw fa-user"></i>
                         <span class="nav-link-text">Pessoas</span>
                     </a>
                 </li>

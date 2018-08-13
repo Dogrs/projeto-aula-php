@@ -1,6 +1,7 @@
 <?php
 include '../config.php';
 
+
 /**
  * Valida formulario simples
  */
@@ -39,7 +40,7 @@ function validarFormularioSimples($post)
     if (!isset($post['cidades']) || !$post['cidades']) {$listaErros['cidades'] = "Cidade obrigatório.";}
     if (!isset($post['estado']) || !$post['estado']) {$listaErros['estado'] = "Estado obrigatório.";}
 
-
+    return $listaErros;
     
 }
 
@@ -47,40 +48,46 @@ function validarFormularioSimples($post)
 // Busca todos os UFs (estados) do banco 
 $listaUf        = select_db("SELECT id, nome, sigla FROM uf     ORDER BY nome ASC;");
 $listaCidades   = select_db("SELECT id, nome, uf_id FROM cidade ORDER BY nome ASC;");
+
 //dd($listaCidades);
 //dd($listaUf);
 
 if ($_SERVER['REQUEST_METHOD'] == 'GET') 
     {
+        //dd($_GET);
         $listaErros = [];
         if (isset($_GET['edit']) && isset($_GET['id']) 
         && $_GET['edit'] == '1' && $_GET['id']) 
         {
-            $uf = select_one_db("SELECT id, nome, sigla FROM uf WHERE id={$_GET['id']}");
+            $pessoa = select_one_db("SELECT id, primeiro_nome,segundo_nome,email,cpf,endereco,bairro,numero,cep,cidade_id,data_nascimento,tipo FROM pessoa WHERE id={$_GET['id']}");
         }
+ 
         include "cadastro-view.php";    
     } 
 else if ($_SERVER['REQUEST_METHOD'] == 'POST') 
     {
         $listaErros = validarFormularioSimples($_POST);
-
+        
+        //dd($_POST);
         if (isset($_POST['id']) && $_POST['id'] )
         {
-            $uf = select_one_db("SELECT id, nome, sigla FROM uf WHERE id = {$_POST['id']}");
+            $pessoa = select_one_db("SELECT id, primeiro_nome,segundo_nome,email,cpf,endereco,bairro,numero,cep,cidade_id,data_nascimento,tipo FROM pessoa WHERE id={$_GET['id']}");
         }
-
-        
+        echo "**** teste1 ****";
+        //dd($_POST);
         if (count($listaErros) > 0) {include "cadastro-view.php";}
         else if (isset($_POST['id']) && $_POST['id'])
-        {
+        { echo "**** teste2 ****";
+            dd($_POST);
+            $cpf_sem_mascara = removerMascaraCpf($post['cpf']);
             // Executo o update
             $sql = "UPDATE uf SET 
                 primeiro_nome   = '{$_POST['primeiro_nome']}', 
                 segundo_nome    = '{$_POST['segundo_nome']}',
                 email           = '{$_POST['email']}',
-                cpf             = '{$_POST['cpf']}',
+                cpf             = '{$cpf_sem_mascara}',
                 data_nascimento = '{$_POST['data_nascimento']}',
-                tipo            = '1',
+                tipo            = '{$_POST['tipo']}',
                 endereco        = '{$_POST['endereco']}',
                 cep             = '{$_POST['cep']}',
                 bairro          = '{$_POST['bairro']}',
@@ -88,17 +95,20 @@ else if ($_SERVER['REQUEST_METHOD'] == 'POST')
                 cidades         = '{$_POST['cidades']}',
                 estado          = '{$_POST['estado']}'
                 WHERE id = {$_POST['id']};";
-            //dd($sql);
+            dd($sql);
             $alterado = update_db($sql);
-            alertSuccess("Sucesso.", "pessoa {$_POST['nome']} alterado com sucesso.");
+            alertSuccess("Sucesso.", "pessoa {$_POST['primeiro_nome']} alterado com sucesso.");
             redirect("/modulo-pessoa/");
         } 
         else 
         {
-            
-
+            echo "**** teste3 ****";
+        dd($_POST);
             //$sql = "INSERT INTO cidade (nome, uf_id) VALUES('".$_POST['nome']."',".$_POST['uf'].");";
             // Executa o insert
+            $novaData = date("Y-m-d",strtotime($_POST['data_nascimento']));
+            //DATA = STR_TO_DATE('$name_01', '%d.%m.%Y')
+            //dd($novaData);
             $sql = "INSERT INTO pessoa 
                 (   primeiro_nome,
                     segundo_nome,
@@ -116,8 +126,8 @@ else if ($_SERVER['REQUEST_METHOD'] == 'POST')
                     '{$_POST['segundo_nome']}',
                     '{$_POST['email']}',
                     '{$_POST['cpf']}',
-                    '{$_POST['data_nascimento']}',
-                    '1',
+                    '{$novaData}',
+                    '{$_POST['tipo']}',
                     '{$_POST['endereco']}',
                     '{$_POST['cep']}',
                     '{$_POST['bairro']}',
@@ -135,8 +145,9 @@ else if ($_SERVER['REQUEST_METHOD'] == 'POST')
             $mensagemSucesso = '';
             $mensagemErro = '';
 
-            if ($pessoaId) {$mensagemSucesso = "pessoa cadastrado com sucesso.";}
-            else {$mensagemErro = "Erro Inesperado";}
+            
+            if ($pessoaId) {alertSuccess("Sucesso.", "Pessoa {$_POST['primeiro_nome']} cadastrada com sucesso.");}
+            else {alertError('Atenção!', "Erro Inesperado");}
             include "cadastro-view.php";
         }
     }

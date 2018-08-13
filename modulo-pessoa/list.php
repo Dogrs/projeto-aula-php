@@ -28,7 +28,7 @@
             }?>
 
         <a href="/modulo-pessoa/cadastro-pessoa.php">
-            <button class="btn btn-default">Novo pessoa </button>
+            <button class="btn btn-default">Nova pessoa </button>
             <br>
             <br>
         </a>
@@ -36,21 +36,22 @@
         <table class="table table-bordered table-striped">  
             <thead> 
                 <tr> 
-                    <th> pessoa </th>
-                    <th> Sigla </th>
+                    <th> Pessoa </th>
+                    <th> CPF </th>
                     <th> Ações </th>
                 </tr>
             </thead>
             <tbody> 
-                <?php foreach($listaUfs as $uf) { ?>
+                <?php foreach($listaPessoas as $pessoas) { ?>
                     <tr> 
-                        <td> <?php echo $uf->nome; ?> </td>
-                        <td> <?php echo $uf->sigla; ?> </td>
+                        <?php $cpfMask = adicionarMascaraCpf($pessoas->cpf); ?>
+                        <td> <?php echo" {$pessoas->primeiro_nome} {$pessoas->segundo_nome}"; ?> </td>
+                        <td> <?php echo $cpfMask; ?> </td>
                         <td>
-                            <a href= "<?php echo "/modulo-pessoa/cadastro-pessoa.php?edit=1&id={$uf->id}"; ?>">
+                            <a href= "<?php echo "/modulo-pessoa/cadastro-pessoa.php?edit=1&id={$pessoas->id}";?>">
                                 <button class="btn btn-primary">Editar</button>
                             </a>
-                            <button class="btn btn-danger" data-delete-message="<?php echo "Deseja deletar o pessoa {$uf->nome} ?"; ?>" data-delete-url="<?php echo "/modulo-pessoa?delete=1&id={$uf->id}"; ?>"  onclick="deletarRegistro(this);">
+                            <button class="btn btn-danger" data-delete-message="<?php echo "Deseja deletar o pessoa {$pessoas->primeiro_nome} ?"; ?>" data-delete-url="<?php echo "/modulo-pessoa?delete=1&id={$pessoas->id}"; ?>"  onclick="deletarRegistro(this);">
                             <i class="fa fa-remove"></i>
                             </button>
                         </td>

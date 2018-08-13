@@ -13,7 +13,7 @@
 			<div class="card-header">
         		<i class="fa fa-user"></i>
 				<?php
-					if (isset($pessoa)) {echo "Alterar Pessoa: {$pessoa->nome}";}
+					if (isset($pessoas)) {echo "Alterar Pessoa: {$pessoas->primeiro_nome}";}
 					else {echo "Cadastrar Pessoa";}
 				?>
 			</div>
@@ -21,8 +21,8 @@
 		<div class="card-body">
 			<form action="<?php echo $SITE_URL . "/modulo-pessoa/cadastro-pessoa.php"; ?>" id="form-cadastro" method="POST">
 
-				<?php if (isset($pessoa)) { ?>
-					<input type="hidden" name="id" value="<?php echo $uf->id; ?>">
+				<?php if (isset($pessoas)) { ?>
+					<input type="hidden" name="id" value="<?php echo $pessoa->id; ?>">
 				<?php } ?>
 
 				<div class="form-group">
@@ -57,10 +57,12 @@
 							<?php echo exibirErro($listaErros, 'data_nascimento'); ?>
 						</div>
 						<div class="col-md-6">
-							<label for="tipo">Tipo</label>
+							<label for="tipo">Tipo</label> <?php //VERIFICAR ?>
 							<select class="form-control" name="tipo" id="tipo" type="text" ?>" />
 							<option value="">Selecione um tipo</option>
-								<?php foreach ($pessoa as $pessoas) {echo "<option value=\"" . $pessoas->tipo . "\">" . $pessoas->tipo . "</option>";}?>
+								<option value="1"> Aluno </option>";
+								<option value="2"> Professor </option>";
+								<?php foreach ($pessoa as $pessoas) {echo "<option value=\"" . $pessoa->tipo . "\">" . $pessoa->tipo . "</option>";}?>
 							</select>
 							<?php echo exibirErro($listaErros, 'tipo'); ?>
 							</div>
@@ -92,7 +94,7 @@
 					</div>
 					<div class="form-row ">
 						<div class="col-md-6">
-							<label for="cidade">Cidade</label>
+							<label for="cidade">Cidade</label><?php //VERIFICAR ?>
 							<select class="form-control" name="cidades" id="cidades" >
 								<option value="">Selecione um estado</option>
 								<?php
@@ -109,7 +111,7 @@
 							</select>
 							<?php echo exibirErro($listaErros, 'cidade'); ?>
 						</div>
-						<div class="col-md-6">
+						<div class="col-md-6"><?php //VERIFICAR ?>
 							<label for="estado">Estado</label>
 							<select class="form-control" name="estado" id="estado" >
 								<option value="">Selecione um estado</option>
