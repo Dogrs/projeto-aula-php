@@ -71,42 +71,46 @@ else if ($_SERVER['REQUEST_METHOD'] == 'POST')
         //dd($_POST);
         if (isset($_POST['id']) && $_POST['id'] )
         {
-            $pessoa = select_one_db("SELECT id, primeiro_nome,segundo_nome,email,cpf,endereco,bairro,numero,cep,cidade_id,data_nascimento,tipo FROM pessoa WHERE id={$_GET['id']}");
+            $pessoa = select_one_db("SELECT id, primeiro_nome,segundo_nome,email,cpf,endereco,bairro,numero,cep,cidade_id,data_nascimento,tipo FROM pessoa WHERE id={$_POST['id']}");
         }
-        echo "**** teste1 ****";
+        //echo "**** teste1 ****";
         //dd($_POST);
         if (count($listaErros) > 0) {include "cadastro-view.php";}
         else if (isset($_POST['id']) && $_POST['id'])
-        { echo "**** teste2 ****";
-            dd($_POST);
-            $cpf_sem_mascara = removerMascaraCpf($post['cpf']);
+        { //echo "**** teste2 ****";
+          // dd($_POST);
+            $cpf_sem_mascara = removerMascaraCpf($_POST['cpf']);
+            $novaDatas = date("Y/m/d",strtotime($_POST['data_nascimento']));
+            //dd($_POST['data_nascimento']);
+            //dd($novaDatas);
             // Executo o update
-            $sql = "UPDATE uf SET 
+            $sql = "UPDATE pessoa SET 
                 primeiro_nome   = '{$_POST['primeiro_nome']}', 
                 segundo_nome    = '{$_POST['segundo_nome']}',
                 email           = '{$_POST['email']}',
                 cpf             = '{$cpf_sem_mascara}',
-                data_nascimento = '{$_POST['data_nascimento']}',
-                tipo            = '{$_POST['tipo']}',
+                data_nascimento = '$novaDatas',
+                tipo            = {$_POST['tipo']},
                 endereco        = '{$_POST['endereco']}',
                 cep             = '{$_POST['cep']}',
                 bairro          = '{$_POST['bairro']}',
                 numero          = '{$_POST['numero']}',
-                cidades         = '{$_POST['cidades']}',
-                estado          = '{$_POST['estado']}'
+                cidade_id       = {$_POST['cidades']}
                 WHERE id = {$_POST['id']};";
-            dd($sql);
+            //dd($sql);
             $alterado = update_db($sql);
             alertSuccess("Sucesso.", "pessoa {$_POST['primeiro_nome']} alterado com sucesso.");
             redirect("/modulo-pessoa/");
         } 
         else 
         {
-            echo "**** teste3 ****";
-        dd($_POST);
+           // echo "**** teste3 ****";
+        //dd($_POST);
             //$sql = "INSERT INTO cidade (nome, uf_id) VALUES('".$_POST['nome']."',".$_POST['uf'].");";
             // Executa o insert
-            $novaData = date("Y-m-d",strtotime($_POST['data_nascimento']));
+            $novaData = date("Y/m/d",strtotime($_POST['data_nascimento']));
+            $cpf_sem_mascara = removerMascaraCpf($_POST['cpf']);
+            
             //DATA = STR_TO_DATE('$name_01', '%d.%m.%Y')
             //dd($novaData);
             $sql = "INSERT INTO pessoa 
@@ -125,7 +129,7 @@ else if ($_SERVER['REQUEST_METHOD'] == 'POST')
                     '{$_POST['primeiro_nome']}',
                     '{$_POST['segundo_nome']}',
                     '{$_POST['email']}',
-                    '{$_POST['cpf']}',
+                    '{$cpf_sem_mascara}',
                     '{$novaData}',
                     '{$_POST['tipo']}',
                     '{$_POST['endereco']}',
@@ -134,6 +138,7 @@ else if ($_SERVER['REQUEST_METHOD'] == 'POST')
                     '{$_POST['numero']}',
                     '{$_POST['cidades']}
                     ')";
+//dd($cpf_sem_mascara);
 //dd($sql);
             //$sql = "INSERT INTO uf (nome,sigla) VALUES('xx','yy') " --> outra forma de fazer as string do SQL 1a PARTE coloca xx e yy
             //$sql = "INSERT INTO uf (nome,sigla) VALUES('{}','{}') " --> Substitui por Chaves

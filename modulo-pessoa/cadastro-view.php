@@ -13,7 +13,7 @@
 			<div class="card-header">
         		<i class="fa fa-user"></i>
 				<?php
-					if (isset($pessoas)) {echo "Alterar Pessoa: {$pessoas->primeiro_nome}";}
+					if (isset($pessoa)) {echo "Alterar Pessoa: {$pessoa->primeiro_nome}";}
 					else {echo "Cadastrar Pessoa";}
 				?>
 			</div>
@@ -21,7 +21,7 @@
 		<div class="card-body">
 			<form action="<?php echo $SITE_URL . "/modulo-pessoa/cadastro-pessoa.php"; ?>" id="form-cadastro" method="POST">
 
-				<?php if (isset($pessoas)) { ?>
+				<?php if (isset($pessoa)) { ?>
 					<input type="hidden" name="id" value="<?php echo $pessoa->id; ?>">
 				<?php } ?>
 
@@ -46,14 +46,17 @@
 						</div>
 						<div class="col-md-4">
 							<label for="cpf">CPF</label>
-							<input class="form-control" name="cpf" id="cpf" placeholder="CPF" type="text" value="<?php echo ( isset($pessoa) ) ? $pessoa->cpf : ''; ?>"/>
+							<?php $cpfComMascara = adicionarMascaraCpf($pessoa->cpf); ?>
+							<input class="form-control" name="cpf" id="cpf" placeholder="CPF" type="text" value="<?php echo ( isset($pessoa) ) ? $cpfComMascara : ''; ?>"/>
 							<?php echo exibirErro($listaErros, 'cpf'); ?>
 						</div>
 					</div>
 					<div class="form-row ">
 						<div class="col-md-6">
 							<label for="data_nascimento">Data de Nascimento</label>
-							<input class="form-control" name="data_nascimento" id="data_nascimento" placeholder="__/__/____" type="text" value="<?php echo ( isset($pessoa) ) ? $pessoa->data_nascimento : ''; ?>"/>
+							<?php $novaData = date("d/m/Y",strtotime($pessoa->data_nascimento)); ?>
+
+							<input class="form-control" name="data_nascimento" id="data_nascimento" placeholder="__/__/____" type="text" value="<?php echo ( isset($pessoa) ) ? $novaData : ''; ?>"/>
 							<?php echo exibirErro($listaErros, 'data_nascimento'); ?>
 						</div>
 						<div class="col-md-6">
