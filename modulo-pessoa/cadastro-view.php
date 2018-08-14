@@ -46,7 +46,7 @@
 						</div>
 						<div class="col-md-4">
 							<label for="cpf">CPF</label>
-							<?php $cpfComMascara = adicionarMascaraCpf($pessoa->cpf); ?>
+							<?php //$cpfComMascara = adicionarMascaraCpf($pessoa->cpf); ?>
 							<input class="form-control" name="cpf" id="cpf" placeholder="CPF" type="text" value="<?php echo ( isset($pessoa) ) ? $cpfComMascara : ''; ?>"/>
 							<?php echo exibirErro($listaErros, 'cpf'); ?>
 						</div>
@@ -54,9 +54,9 @@
 					<div class="form-row ">
 						<div class="col-md-6">
 							<label for="data_nascimento">Data de Nascimento</label>
-							<?php $novaData = date("d/m/Y",strtotime($pessoa->data_nascimento)); ?>
+							<?php // $novaData = date("d/m/Y",strtotime($pessoa->data_nascimento)); ?>
 
-							<input class="form-control" name="data_nascimento" id="data_nascimento" placeholder="__/__/____" type="text" value="<?php echo ( isset($pessoa) ) ? $novaData : ''; ?>"/>
+							<input class="form-control" name="data_nascimento" id="data_nascimento" required placeholder="__/__/____" type="text" value="<?php echo ( isset($pessoa) ) ? $novaData : ''; ?>"/>
 							<?php echo exibirErro($listaErros, 'data_nascimento'); ?>
 						</div>
 						<div class="col-md-6">
