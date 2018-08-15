@@ -30,6 +30,20 @@
 <script src="<?php echo $SITE_URL . "/static/vendor/jquery.mask.min.js"; ?> "></script>
 <script src="<?php echo $SITE_URL . "/static/js/sb-admin.min.js"; ?>"></script>
 <script src="<?php echo $SITE_URL . "/static/vendor/bootstrap-notify.js" ?>"></script>
+<script src="<?php echo $SITE_URL . "/static/js/jquery-3.3.1.min.js" ?>"></script>
+<script src="<?php echo $SITE_URL . "/static/vendor/bootstrap/js/bootstrap.min.js" ?>"></script>
+<script src="<?php echo $SITE_URL . "/static/vendor/bootstrap/js/bootstrap-datepicker.js" ?>"></script>
+<script src="<?php echo $SITE_URL . "/static/vendor/bootstrap/js/bootstrap-datepicker.pt-BR.js" ?>"></script>
+<script>
+    $('.input-group.date').datepicker({
+    	format: 'dd/mm/yyyy',
+    	language: 'pt-BR',
+    	weekStart: 0,
+    	startDate:'0d',
+    	todayHighlight: true
+    });
+</script>
+
 <script src="<?php echo $SITE_URL . "/static/js/home.js"; ?> "></script>
 <?php /* FIM SCRIPTS ADICIONAIS */ ?>	
 

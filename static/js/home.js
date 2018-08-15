@@ -31,10 +31,10 @@ function trocarCidades() {
 
 // Os codigos dentro do ready serão executados somente depois
 // que a página carregar todo o html.
-$(document).ready(function() {
+/*$(document).ready(function() {
     $('#uf').on('change', trocarCidades);
     trocarCidades();
-});
+});*/
 
 /**
  * Parametros recebidos pelo option:

@@ -163,7 +163,7 @@ function ValidaData($dat){
 }
 
 //Exemplo de chamada a função
-ValidaData("31/02/2002")
+//ValidaData("31/02/2002")
 
 
 ?>
