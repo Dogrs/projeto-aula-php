@@ -65,14 +65,9 @@
 					</div>
 					<div class="form-row ">
 						<div class="col-sm-6" >
-							<div class="form-group">
 							<label for="data_nascimento">Data de Nascimento</label>
-								<div class='input-group date' id='datetimepicker9'>
-									<input type='text' class="form-control" name="data_nascimento" id="data_nascimento" required placeholder="__/__/____" type="text" value="<?php echo ( isset($pessoa) ) ? $pessoa->data_nascimento :(isset ($_POST['data_nascimento']) ? $_POST['data_nascimento'] : ''); ?>"/>
-									<span class="input-group-addon"> <span class="fa fa-fw fa-calendar"></span> </span>
-									<?php echo exibirErro($listaErros, 'data_nascimento'); ?>
-								</div>
-							</div>
+							<input type='text' class="form-control datepicker" autocomplete="disable" name="data_nascimento" id="data_nascimento" required placeholder="__/__/____" type="text" value="<?php echo ( isset($pessoa) ) ? $pessoa->data_nascimento :(isset ($_POST['data_nascimento']) ? $_POST['data_nascimento'] : ''); ?>"/>
+							<?php echo exibirErro($listaErros, 'data_nascimento'); ?>
 						</div>
 						<div class="col-md-6">
 							Sexo:<br>
@@ -133,8 +128,7 @@
 								<option value="">Selecione um estado</option>
 								<?php
 								// ForEach
-								
-								foreach ($listaUf as $uf) 
+								foreach ($listaUfs as $uf) 
 								{
 									$checked = '';
 									//if (isset($cidade) && $cidade->uf_id == $uf->id) {$checked = "selected";}
@@ -175,4 +169,30 @@
 <?php /* FIM CONTEUDO */ ?>
 
 
+
 <?php include "../comum/footer.php"; ?>
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('.datepicker').datepicker({
+			format:'dd/mm/yyyy',
+			language:'pt-BR',
+		}).mask('00/00/0000');
+		
+		$('#cpf').mask('000.000.000-00'); //usando o id do input
+
+		$('#cep').mask('00000-000');
+
+		$("#uf").on('change', function(){
+			var obj = $(this);
+			var id = obj.val();
+			//console.log(this.value);
+
+			if (id) //executa todas as funcões AJAX para buscar todas as cidades do estado selecionado
+			{
+
+			}
+		})
+
+	});
+</script>

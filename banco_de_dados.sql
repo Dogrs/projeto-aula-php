@@ -27,7 +27,7 @@ CREATE TABLE uf(
 CREATE TABLE cidade(
     id int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
     nome varchar(255)  NOT NULL,
-    uf_id int(11)  NOT NULL
+    uf_id int(11)  NOT NULL,
     FOREIGN KEY (uf_id) REFERENCES uf(id)
 );
 

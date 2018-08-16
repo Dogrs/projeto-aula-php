@@ -65,8 +65,9 @@ function validarFormulario($post)
 }
 
 $dataNascimentoBanco = DateTime::createFromFormat('d/m/Y H:i:s', $_POST['data_nascimento']." 00:00:00");
+
 // Busca todos os UFs (estados) do banco 
-$listaUf        = select_db("SELECT id, nome, sigla FROM uf     ORDER BY nome ASC;");
+$listaUfs        = select_db("SELECT id, nome, sigla FROM uf     ORDER BY nome ASC;");
 $listaCidades   = select_db("SELECT id, nome, uf_id FROM cidade ORDER BY nome ASC;");
 
 //dd($listaCidades);

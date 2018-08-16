@@ -13,7 +13,10 @@
 	<!-- Custom fonts for this template-->
 	<link href="<?php echo $SITE_URL . "/static/vendor/font-awesome/css/font-awesome.css"; ?>" rel="stylesheet" type="text/css">
 	<link href="<?php echo $SITE_URL . "/static/vendor/animate.css"; ?>" rel="stylesheet" type="text/css">
+	<link href="<?php echo $SITE_URL . "/static/vendor/datepicker/css/bootstrap-datepicker3.min.css"; ?>" rel="stylesheet">
+
 	<!-- Custom styles for this template-->
 	<link href="<?php echo $SITE_URL . "/static/css/sb-admin.css" ?>" rel="stylesheet">
+	
 </head>
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
