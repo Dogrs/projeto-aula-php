@@ -64,14 +64,19 @@ function validarFormulario($post)
     return $listaErros;
 }
 
-$dataNascimentoBanco = DateTime::createFromFormat('d/m/Y H:i:s', $_POST['data_nascimento']." 00:00:00");
+/*
+// Manipulando datas com DateTime:
+$data = DateTime::createFromFormat('d/m/Y H:i:s', '10/08/1990 00:00:00');
+dd($data->format('Y-m-d H:i:s.u'));
+*/
+if (isset($_POST['data_nascimento']))
+{
+    $dataNascimentoBanco = DateTime::createFromFormat('d/m/Y H:i:s', $_POST['data_nascimento']." 00:00:00");
+}
 
 // Busca todos os UFs (estados) do banco 
 $listaUfs        = select_db("SELECT id, nome, sigla FROM uf     ORDER BY nome ASC;");
-$listaCidades   = select_db("SELECT id, nome, uf_id FROM cidade ORDER BY nome ASC;");
-
-//dd($listaCidades);
-//dd($listaUf);
+?><script type="text/javascript">console.log("caraio4");</script><?php
 
 if ($_SERVER['REQUEST_METHOD'] == 'GET') 
     {   echo ' **** teste 1 *** ';
@@ -82,7 +87,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET')
         {
             $pessoa = select_one_db("SELECT id, primeiro_nome,segundo_nome,email,cpf,endereco,bairro,numero,cep,cidade_id,data_nascimento,tipo FROM pessoa WHERE id={$_GET['id']}");
         }
- 
         include "cadastro-view.php";    
     } 
 else if ($_SERVER['REQUEST_METHOD'] == 'POST') 

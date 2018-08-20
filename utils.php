@@ -165,5 +165,23 @@ function ValidaData($dat){
 //Exemplo de chamada a função
 //ValidaData("31/02/2002")
 
+/**
+ * Verifica se a requisição é Ajax.
+ * Se for Ajax retorna true.
+ * Se não retorna false.
+ */
+function checkAjax() {
+    ?><script type="text/javascript">console.log("no utils");</script><?php
+    if (isset($_SERVER['HTTP_X_REQUESTED_WITH']) 
+        && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest') {
+            ?><script type="text/javascript">console.log(" Sertinho no Utils ");</script><?php
+        return true;
+    }
+    ?><script type="text/javascript">console.log("Ruim no Utils");</script><?php
+    return false;
+  }
+
+
+
 
 ?>
