@@ -16,7 +16,7 @@
             else {alertError('Atenção!', "Falha ao tentar remover a pessoa.", 10000);}
         }
     
-    $listaPessoas   = select_db("SELECT id, primeiro_nome, segundo_nome, cpf FROM pessoa ORDER BY primeiro_nome ASC");
+    $listaPessoas   = select_db("SELECT id, primeiro_nome, segundo_nome, cpf FROM pessoa ORDER BY primeiro_nome ASC, segundo_nome ASC");
     //dd($listaUfs);
     include "list.php";
     }

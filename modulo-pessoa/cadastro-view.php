@@ -59,7 +59,7 @@
 						</div>
 						<div class="col-md-4">
 							<label for="cpf">CPF</label>
-							<input class="form-control" name="cpf" id="cpf" placeholder="___.___.___-__" type="text" value="<?php echo ( isset($pessoa) ) ? adicionarMascaraCpf($pessoa->cpf) :(isset ($_POST['cpf']) ? adicionarMascaraCpf($pessoa->cpf) : ''); ?>"/>
+							<input class="form-control" name="cpf" id="cpf" placeholder="___.___.___-__" type="text" value="<?php echo ( isset($pessoa) ) ? ($pessoa->cpf) :(isset ($_POST['cpf']) ? $__POST['cpf'] : ''); ?>"/>
 							<?php echo exibirErro($listaErros, 'cpf'); ?>
 						</div>
 					</div>
@@ -154,78 +154,7 @@
 </div>
 <?php /* FIM CONTEUDO */ ?>
 
-<?php include "../comum/footer.php"; /*?>
-
-
-<script type="text/javascript">
-
-	$(document).ready(function()
-	{
-		$('.datepicker').datepicker(
-		{
-			format:'dd/mm/yyyy',
-			language:'pt-BR',
-		}).mask('00/00/0000');
-		
-		$('#cpf').mask('000.000.000-00'); 
-
-		$('#cep').mask('00000-000');
-
-		$("#uf").on('change', function(){
-			var selectUf = $(this); //pega o componente UF quando ele é modificado
-			var ufId = selectUf.val(); //pega o valor do UF selecionado (value = id do estado)
-			console.log(ufId);
-			console.log("caraio3");
-
-			if (ufId) 
-			{
-				var selectCidade = $('#cidade'); //pega o componente cidade
-				var options = '<option value=\"\">Selecione um estado</option>'; //inicia o componente "options" com o valor "selecione"
-				selectUf.attr('disabled', true); //altera o atributo HTML do componente selectUF para desabilitado, para que não possa alterar
-				selectCidade.attr('disabled', true) //altera o atributo da Cidade para desabilitado
-					.find('option:first')	//pega o primeiro valor de option do "componente select"
-					.html('Buscando cidades...'); //escreve em cidade " buscando" para fazer de conta que está procurando
-
-console.log("vai Chamar o AJAX");
-
-				$.ajax(
-				{ 
-					url: '<?php echo $SITE_URL . "/modulo-pessoa/ajax.php"; ?>', //url que será chamada quando o UF for alterado
-					dataType: 'json',		//tipo de "linguagem" será usada
-					data: 					//oque será passado para o URL, "nome da chave:valor" pode passar mais de um valor
-					{
-						uf_id: ufId
-					},
-					success: function(dados) //executa havendo retorno OK do URL
-						if (dados.length > 0)  //se tiver algo dentro de "dados"
-						{
-							for(var i=0; i < dados.length; i++)  //não existe FOREACH aqui pois é JavaScript tem que ser FOR mesmo //
-							{
-								//$("#cidade").append("<option value=\"" + dados[i].id + "\">" + dados[i].nome + "</option>") 	// outra forma de preencher as cidades.
-								options += "<option value=\"" + dados[i].id + "\">" + dados[i].nome + "</option>"//adiciona, a cada passada, o id e o nome de cada cidade em uma linha de options
-							}
-						}
-					},
-					error: function(erro) // executa quando tem erros no retorno do url
-					{
-						console.log(erro);
-					}
-				}).always(function() //Sempre executa após retorno da URL
-				{
-					selectCidade.html(options); 			//pega o "objeto cidade"
-					selectUf.attr('disabled', false); 		//habilita o "objeto estado"
-					selectCidade.attr('disabled', false);	//habilita o "objeto cidade"
-					if (options > 0) 
-					{
-						selectCidade.find('option:first').html('Selecione um estado');
-					}
-				});
-			}
-		});
-	});
-</script>
-
-*/?>
+<?php include "../comum/footer.php"; ?>
 
 <script type="text/javascript">
 
@@ -239,7 +168,6 @@ console.log("vai Chamar o AJAX");
 		$("#uf").on('change', function(){
 			var selectUf = $(this);
 			var ufId = selectUf.val();
-			console.log("vai Chamar o AJAX");
 
 			if (ufId) {
 				// Executa funcao Ajax para buscar todas as cidades do estado selecionado
@@ -258,18 +186,13 @@ console.log("vai Chamar o AJAX");
 						uf_id: ufId
 					},
 					success: function(dados) {
-						dd(ufId);
 						if (dados.length > 0) {
 							for(var i=0; i < dados.length; i++) {
-								// Forma de preencher as cidades mais ineficiente.
-								//$("#cidade").append("<option value=\"" + dados[i].id + "\">" + dados[i].nome + "</option>")
 								options += "<option value=\"" + dados[i].id + "\">" + dados[i].nome + "</option>"
 							}
 						}
 					},
-					error: function(erro) {
-						console.log(erro);
-					}
+					error: function(erro) {console.log(erro);}
 				}).always(function() {
 					selectCidade.html(options);
 					selectUf.attr('disabled', false);
@@ -278,7 +201,6 @@ console.log("vai Chamar o AJAX");
 						selectCidade.find('option:first').html('Selecione');
 					}
 				});
-				
 			}
 		});
 	});

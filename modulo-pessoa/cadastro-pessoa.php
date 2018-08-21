@@ -44,7 +44,7 @@ function validarFormulario($post)
         'bairro' => "Bairro obrigatório.",
         'numero' => "Número obrigatório.",
         'cep' => "Cep obrigatório.",
-        'cidades' => "Cidade obrigatória.",
+        'cidade' => "Cidade obrigatória.",
         'cpf' => "CPF obrigatório.",
         'sexo' => "Sexo obrigatório.",
     ];
@@ -54,13 +54,32 @@ function validarFormulario($post)
     {
         if (!isset($post[$chaveCampo]) || !$post[$chaveCampo] ) {$listaErros[$chaveCampo] = $mensagemCampo;}
     }
-    if ( !isset($listaErros['cpf']) && $post['cpf'] && !validarCpf($post['cpf'])) {$listaErros['cpf'] = "CPF inválido.";}
+    if ( !isset($listaErros['cpf']) && $post['cpf'] && !validarCpf($post['cpf'])) 
+    {
+        $listaErros['cpf'] = "CPF inválido.";
+    }
+    else if ($post['cpf'])
+    {
+        $cpf_sem_mascara = removerMascaraCpf($post['cpf']);
+
+        $resultado = select_one_db("SELECT COUNT(id) AS count FROM pessoa WHERE cpf='{$cpf_sem_mascara}';");
+        if ($resultado->count > 0) 
+        {
+            $listaErros['cpf'] = "CPF já cadastrado.";
+        }
+    }
+
     if ( !isset($listaErros['email']) && $post['email'] && !validarEmail($post['email'])) {$listaErros['email'] = "Email inválido.";}
+
     if ( !isset($listaErros['data_nascimento']) && $post['data_nascimento']) 
     {       
         $dataNascimento = DateTime::createFromFormat('d/m/Y H:i:s', $post['data_nascimento']." 00:00:00");
         if (! $dataNascimento) {$listaErros['data_nascimento'] = "Data nascimento inválida.";}
     }
+
+    
+
+
     return $listaErros;
 }
 
@@ -76,11 +95,10 @@ if (isset($_POST['data_nascimento']))
 
 // Busca todos os UFs (estados) do banco 
 $listaUfs        = select_db("SELECT id, nome, sigla FROM uf     ORDER BY nome ASC;");
-?><script type="text/javascript">console.log("caraio4");</script><?php
 
 if ($_SERVER['REQUEST_METHOD'] == 'GET') 
-    {   echo ' **** teste 1 *** ';
-        //dd($_GET);
+    {  
+        
         $listaErros = [];
         if (isset($_GET['edit']) && isset($_GET['id']) 
         && $_GET['edit'] == '1' && $_GET['id']) 
@@ -91,31 +109,25 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET')
     } 
 else if ($_SERVER['REQUEST_METHOD'] == 'POST') 
     {
+        
         $listaErros = validarFormulario($_POST);
-        echo "**** teste2 ****";
+        //d($listaErros);
         //dd($_POST);
         if (isset($_POST['id']) && $_POST['id'] )
         {
             $pessoa = select_one_db("SELECT id, primeiro_nome,segundo_nome,email,cpf,endereco,bairro,numero,cep,cidade_id,data_nascimento,tipo FROM pessoa WHERE id={$_POST['id']}");
         }
-        echo "**** teste3 ****";
-        //d($_POST);
-        //d($listaErros);
+
         if (count($listaErros) > 0) {include "cadastro-view.php";}
         else if (isset($_POST['id']) && $_POST['id'])
-        { echo "**** teste4 ****";
-           //d($_POST);
+        { 
+            //dd($_POST);
             $cpf_sem_mascara = removerMascaraCpf($_POST['cpf']);
-            //$novaDatas = date("Y/m/d",strtotime($_POST['data_nascimento']));
-            //d($novaDatas);
-            //d($dataNascimentoBanco);
             $dataNascimentoBanco = DateTime::createFromFormat('d/m/Y H:i:s', $_POST['data_nascimento']." 00:00:00");
+            dd($dataNascimentoBanco->format('Y-m-d H:i:s.u'));
             d($dataNascimentoBanco);
-            //d($_POST);
-            //dd($_POST['primeiro_nome']);
             d($dataNascimentoBanco->date);
-            //d($_POST['data_nascimento']);
-            //dd($novaDatas);
+
             // Executo o update
             $sql = "UPDATE pessoa SET 
                 primeiro_nome   = '{$_POST['primeiro_nome']}', 
@@ -139,15 +151,14 @@ else if ($_SERVER['REQUEST_METHOD'] == 'POST')
         } 
         else 
         {
-            echo "**** teste6 ****";
-        dd($_POST);
+            $dataNascimentoBanco = DateTime::createFromFormat('d/m/Y H:i:s', $_POST['data_nascimento']." 00:00:00");
+            $dataNascimentoBanco2 = $dataNascimentoBanco->format('Y-m-d H:i:s.u');
+            //dd($dataNascimentoBanco2);
+            //dd($_POST);
             //$sql = "INSERT INTO cidade (nome, uf_id) VALUES('".$_POST['nome']."',".$_POST['uf'].");";
             // Executa o insert
-            $novaData = date("Y/m/d",strtotime($_POST['data_nascimento']));
             $cpf_sem_mascara = removerMascaraCpf($_POST['cpf']);
-            
-            //DATA = STR_TO_DATE('$name_01', '%d.%m.%Y')
-            //dd($novaData);
+            //dd($cpf_sem_mascara);
             $sql = "INSERT INTO pessoa 
                 (   primeiro_nome,
                     segundo_nome,
@@ -165,21 +176,15 @@ else if ($_SERVER['REQUEST_METHOD'] == 'POST')
                     '{$_POST['segundo_nome']}',
                     '{$_POST['email']}',
                     '{$cpf_sem_mascara}',
-                    '{$novaData}',
-                    '{$_POST['tipo']}',
+                    '{$dataNascimentoBanco2}',
+                    {$_POST['tipo']},
                     '{$_POST['endereco']}',
                     '{$_POST['cep']}',
                     '{$_POST['bairro']}',
                     '{$_POST['numero']}',
-                    '{$_POST['cidades']}
-                    ')";
-//dd($cpf_sem_mascara);
-//dd($sql);
-            //$sql = "INSERT INTO uf (nome,sigla) VALUES('xx','yy') " --> outra forma de fazer as string do SQL 1a PARTE coloca xx e yy
-            //$sql = "INSERT INTO uf (nome,sigla) VALUES('{}','{}') " --> Substitui por Chaves
-            //$sql = "INSERT INTO uf (nome,sigla) VALUES('{$_POST['nome']}','{$_POST['sigla']}') "  --> ajuste com o campo, porem não funciona to UPPER
-            //$sigla = strtoupper($_POST['sigla']); // Criada uma variavel tudo em Maiusculo para usar o código de cima
-            //$sql = "INSERT INTO uf (nome,sigla) VALUES('{$_POST['nome']}','{$sigla}') " --> agora usando a variavel, gravamos o texto em UPPER
+                    {$_POST['cidade']}
+                    )";
+
 
             $pessoaId = insert_db($sql);
             $mensagemSucesso = '';
