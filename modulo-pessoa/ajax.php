@@ -13,7 +13,7 @@ if (!checkAjax()) {
 // Quando vier o parametro 'uf_id' na requisição, pegamos ele através da variavel global $_GET['uf_id'].
 if (isset($_GET['uf_id']) && $_GET['uf_id'] ) {
     $listaCidades = select_db("SELECT id, nome FROM cidade WHERE uf_id = {$_GET['uf_id']};");
-    sleep(2);
+    sleep(1);
     echo json_encode($listaCidades);
 }
 ?>

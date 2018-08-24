@@ -99,3 +99,6 @@ ALTER TABLE pessoa ADD FOREIGN KEY (cidade_id) REFERENCES cidade(id);
 */
 
 
+/* Adiciona coluna SEXO na tabela pessoa com valor padrão 'M' */
+ALTER TABLE pessoa ADD COLUMN sexo varchar(1) NOT NULL DEFAULT 'M'; 
+

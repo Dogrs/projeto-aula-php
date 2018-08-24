@@ -21,7 +21,7 @@ ini_set('display_errors', 1);
 ini_set('display_startup_erros', 1);
 error_reporting(E_ALL);
 
-//$SITE_URL = 'http://aulaphp.com'//'http://localhost/projeto-aula-php';
-$SITE_URL = 'http://aula.com'
+$SITE_URL = 'http://aulaphp.com'//'http://localhost/projeto-aula-php';
+//$SITE_URL = 'http://aula.com'
 //$SITE_URL = 'http://aulaphp.com/projeto-aula-php/'
 ?>
