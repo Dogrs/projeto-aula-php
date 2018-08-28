@@ -1,11 +1,10 @@
 <?php
 include "config.php";
 ?>
-<h1>Index Projeto aula PHP</h1>
 
-<h2> Substitulo </h2>
 
 <script type='text/javascript'>
-    window.location.href = '/modulo-cidade/';
+    window.location.href = '/login/';
+    //window.location.href = '/modulo-cidade/';
     //window.location.href = '/projeto-aula-php/modulo-cidade/';
 </script>

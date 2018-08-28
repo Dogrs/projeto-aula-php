@@ -102,3 +102,15 @@ ALTER TABLE pessoa ADD FOREIGN KEY (cidade_id) REFERENCES cidade(id);
 /* Adiciona coluna SEXO na tabela pessoa com valor padrão 'M' */
 ALTER TABLE pessoa ADD COLUMN sexo varchar(1) NOT NULL DEFAULT 'M'; 
 
+
+/* ********** Cria a tabela de usuário para o login ***********  */
+CREATE TABLE usuario(
+    id int(11) NOT NULL AUTO_INCREMENT,
+    nome varchar(255) NOT NULL,
+    email varchar(255) NOT NULL,
+    senha varchar(255) NOT NULL,
+    recuperar_senha varchar(255) NULL,
+    PRIMARY KEY (id),
+    unique key (email)
+    )
+
