@@ -1,10 +1,15 @@
 <?php
-include "../config.php";
+    include "../config.php";
 
     function logar($email, $senha)
     {
+        // senha md5 1234: 81dc9bdb52d04dc20036dbd8313ed055
         // verifica no banco
-        if ($email == 'roberzguerra@gmail.com' && md5($senha) == '81dc9bdb52d04dc20036dbd8313ed055') 
+        // Quando for salvar a senha, gere o hash md5 adicionando mais strings na senha, exemplo: md5('CursoFlexoo'. $email . $senha)
+        $hashSenha = md5($senha);
+        $usuario = select_one_db("SELECT senha FROM usuario WHERE email = '{$email}';"); 
+        
+        if ($usuario && $usuario->senha == $hashSenha)
         {
             // parametros:
             // 1 - nome do cookie
@@ -20,6 +25,7 @@ include "../config.php";
 
     if ($_SERVER['REQUEST_METHOD'] == 'GET') 
     {
+        // Abre a pagina de login
         include 'view.php';
     }
     else if ($_SERVER['REQUEST_METHOD'] == 'POST') 
@@ -27,17 +33,14 @@ include "../config.php";
         $email = $_POST['inputemail'];
         $senha = $_POST['inputsenha'];
         
-        if (logar($email, $senha)) 
+        if ($email && $senha && logar($email, $senha)) 
         {
             redirect('/modulo-pessoa/');
-        } 
-        else 
+        }
+        else
         {
             $mensagemErro = "Email ou senha incorretos.";
         }
-        
         include 'view.php';
-        //    setcookie("login", "email do usuario");
-        //    redirect('/cadastro-pessoa/');
     }
 ?>

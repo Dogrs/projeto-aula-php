@@ -29,6 +29,12 @@
                         <span class="nav-link-text">Pessoas</span>
                     </a>
                 </li>
+                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
+                <a class="nav-link" href="/login/logout.php">
+                    <i class="fa fa-fw fa-user"></i>
+                    <span class="nav-link-text">Sair</span>
+                </a>
+            </li>
             </ul>
 
             <ul class="navbar-nav sidenav-toggler">
