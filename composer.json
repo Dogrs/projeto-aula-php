@@ -1,0 +1,10 @@
+{
+    "name": "flexxo/projeto-aula-php",
+    "authors": [
+        {
+            "name": "dogrs",
+            "email": "luiz.motter@gmail.com"
+        }
+    ],
+    "require": {"phpmailer/phpmailer": "~6.0"}
+}
